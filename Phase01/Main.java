@@ -4,10 +4,10 @@ import java.io.*;
 public class Main
 {
     
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-
+        
         InvertedIndex invertedIndex = new InvertedIndex();
         invertedIndex.readData("EnglishData/");
         

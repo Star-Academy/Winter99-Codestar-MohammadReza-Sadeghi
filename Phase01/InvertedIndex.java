@@ -3,11 +3,16 @@ import java.io.*;
 
 public class InvertedIndex
 {
-    HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
+    private HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
 
-    public void readData(String dataFolder) throws IOException
+    HashMap<String, HashSet<Integer>> getIndex()
     {
-        FileReader fileReader = new FileReader(dataFolder);
+        return this.index;
+    }
+
+    public void readData(String dataFolder)
+    {
+        final FileReader fileReader = new FileReader(dataFolder);
         ArrayList<String> docs = fileReader.read();
         for (int i = 0; i < docs.size(); i++)
         {
@@ -24,7 +29,7 @@ public class InvertedIndex
     void addToIndex(String word, int doc)
     {
         HashSet<Integer> docList = index.get(word);
-        if (docList == null)
+        if (!index.containsKey(word))
         {
             docList = new HashSet<Integer>();
             docList.add(doc);

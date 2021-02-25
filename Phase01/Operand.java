@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Operand
 {
-    ArrayList<String> words;
-    HashSet<Integer> docs;
+    private ArrayList<String> words;
+    private HashSet<Integer> docs;
 
     public ArrayList<String> getWords()
     {
@@ -15,13 +15,13 @@ public class Operand
         return this.docs;
     }
 
-    public void setWords(ArrayList<String> w)
+    public void setWords(ArrayList<String> words)
     {
-        this.words = w;
+        this.words = words;
     }
 
-    public void setDocs(HashSet<Integer> d)
+    public void setDocs(HashSet<Integer> docs)
     {
-        this.docs = d;
+        this.docs = docs;
     }
 }

@@ -2,14 +2,14 @@ import java.util.*;
 
 public class QuerySearcher
 {
-    Operand andOperands = new Operand();
-    Operand orOperands = new Operand();
-    Operand excludeOperands = new Operand();
-    InvertedIndex invertedIndex;
+    private Operand andOperands = new Operand();
+    private Operand orOperands = new Operand();
+    private Operand excludeOperands = new Operand();
+    private InvertedIndex invertedIndex;
     
-    public QuerySearcher(InvertedIndex ii)
+    public QuerySearcher(InvertedIndex invertedIndex)
     {
-        this.invertedIndex = ii;
+        this.invertedIndex = invertedIndex;
     }
 
     public HashSet<Integer> search(String[] inputWords)
@@ -51,8 +51,12 @@ public class QuerySearcher
         excludeOperands.setWords(exWords);
     }
 
-    // a = and(a, b)
-    // has better performance if size(a) < size(b)
+    /**
+     * a = and(a, b)
+     * 
+     * @param two hashSets
+     * @return nothing(and(a, b) is stored in a)
+     */
     void and(HashSet<Integer> a, HashSet<Integer> b)
     {
         for (Iterator<Integer> i = a.iterator(); i.hasNext(); )
@@ -63,19 +67,22 @@ public class QuerySearcher
         }
     }
 
-    // This function gets a list of words and
-    // returns the word which has fewest docs in the index
+    /**
+     * 
+     * @param a list of words
+     * @return the word which has fewest docs in the index
+     */
     String findMinWord(ArrayList<String> words)
     {
-        int minimumDocSize = invertedIndex.index.size();
+        int minimumDocSize = invertedIndex.getIndex().size();
         String minimumWord = "";
         for (String w: words)
         {
-            if (invertedIndex.index.get(w) == null)
+            if (!invertedIndex.getIndex().containsKey(w))
                 return w;
-            if (invertedIndex.index.get(w).size() < minimumDocSize)
+            if (invertedIndex.getIndex().get(w).size() < minimumDocSize)
             {
-                minimumDocSize = invertedIndex.index.get(w).size();
+                minimumDocSize = invertedIndex.getIndex().get(w).size();
                 minimumWord = w;
             }
         }
@@ -89,15 +96,15 @@ public class QuerySearcher
         HashSet<Integer> result = new HashSet<>();
 
         String minimumWord = findMinWord(words);
-        if (invertedIndex.index.get(minimumWord) == null)
+        if (invertedIndex.getIndex().get(minimumWord) == null)
         {
             andOperands.setDocs(result);
             return;
         } 
 
-        result.addAll(invertedIndex.index.get(minimumWord));
+        result.addAll(invertedIndex.getIndex().get(minimumWord));
         for (String w: words)
-            and(result, invertedIndex.index.get(w));
+            and(result, invertedIndex.getIndex().get(w));
         andOperands.setDocs(result);
     }
 
@@ -107,8 +114,8 @@ public class QuerySearcher
         ArrayList<String> words = orOperands.getWords();
         HashSet<Integer> result = new HashSet<>();
         for (String w: words)
-            if (invertedIndex.index.get(w) != null)
-            result.addAll(invertedIndex.index.get(w));
+            if (invertedIndex.getIndex().get(w) != null)
+            result.addAll(invertedIndex.getIndex().get(w));
         orOperands.setDocs(result);
     }
 
@@ -140,15 +147,17 @@ public class QuerySearcher
         return result;
     }
 
-    // This method returns the maximum size of
-    // documents which mush be excluded
+    /**
+     * 
+     * @return the maximum size of documents which mush be excluded
+     */
     int getExcludeDocSize()
     {
         ArrayList<String> exWords = excludeOperands.getWords();
         int exDocSize = 0;
         for (String ew: exWords)
-            if (invertedIndex.index.get(ew) != null)
-                exDocSize += invertedIndex.index.get(ew).size();
+            if (invertedIndex.getIndex().get(ew) != null)
+                exDocSize += invertedIndex.getIndex().get(ew).size();
         return exDocSize;
     }
 
@@ -172,8 +181,11 @@ public class QuerySearcher
             excludingByExDocs(result);
     }
 
-    // This method removes exclusion documents
-    // by iterating over result
+    /**
+     * This method removes exclusion documents by iterating over result
+     *
+     * @param result of and & or documents calculated before
+     */
     void excludingByResult(HashSet<Integer> result)
     {
         ArrayList<String> exWords = excludeOperands.getWords();
@@ -181,20 +193,23 @@ public class QuerySearcher
         {
             Integer doc = i.next();
             for (String ew: exWords)
-                if (invertedIndex.index.get(ew).contains(doc))
+                if (invertedIndex.getIndex().get(ew).contains(doc))
                     i.remove();
         }
     }
 
-    // This method removes exclusion documents
-    // by iterating over exclusion words
+    /**
+     * This method removes exclusion documents by iterating over exclusion words
+     *
+     * @param result of and & or documents calculated before
+     */
     void excludingByExDocs(HashSet<Integer> result)
     {
         ArrayList<String> exWords = excludeOperands.getWords();
         for (String ew: exWords)
         {
-            if (invertedIndex.index.get(ew) != null)
-                result.removeAll(invertedIndex.index.get(ew));
+            if (invertedIndex.getIndex().get(ew) != null)
+                result.removeAll(invertedIndex.getIndex().get(ew));
         }
     }
 }
