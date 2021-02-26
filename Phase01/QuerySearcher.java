@@ -24,31 +24,19 @@ public class QuerySearcher
         return result;
     }
 
-    void getAndWords(String[] inputWords)
+    void setAndWords(String[] inputWords)
     {
-        ArrayList<String> andWords = new ArrayList<>();
-        for (String w: inputWords)
-            if (w.charAt(0) != '+' && w.charAt(0) != '-')
-                andWords.add(w);
-        andOperands.setWords(andWords);
+        andOperands.setWords(Tokenizer.extractAndWords(inputWords));
     }
 
-    void getOrWords(String[] inputWords)
+    void setOrWords(String[] inputWords)
     {
-        ArrayList<String> orWords = new ArrayList<>();
-        for (String w: inputWords)
-            if (w.charAt(0) == '+')
-                orWords.add(w.substring(1));
-        orOperands.setWords(orWords);
+        orOperands.setWords(Tokenizer.extractOrWords(inputWords));
     }
 
-    void getExcludeWords(String[] inputWords)
+    void setExcludeWords(String[] inputWords)
     {
-        ArrayList<String> exWords = new ArrayList<>();
-        for (String w: inputWords)
-            if (w.charAt(0) == '-')
-                exWords.add(w.substring(1));
-        excludeOperands.setWords(exWords);
+        excludeOperands.setWords(Tokenizer.extractExcludeWords(inputWords));
     }
 
     /**
@@ -91,7 +79,7 @@ public class QuerySearcher
 
     void computeAndDocs(String[] inputWords)
     {
-        getAndWords(inputWords);
+        setAndWords(inputWords);
         ArrayList<String> words = andOperands.getWords();
         HashSet<Integer> result = new HashSet<>();
 
@@ -110,7 +98,7 @@ public class QuerySearcher
 
     void computeOrDocs(String[] inputWords)
     {
-        getOrWords(inputWords);
+        setOrWords(inputWords);
         ArrayList<String> words = orOperands.getWords();
         HashSet<Integer> result = new HashSet<>();
         for (String w: words)
@@ -163,7 +151,7 @@ public class QuerySearcher
 
     void removeExcludeDocs(String[] inputWords, HashSet<Integer> result)
     {
-        getExcludeWords(inputWords);
+        setExcludeWords(inputWords);
         ArrayList<String> exWords = excludeOperands.getWords();
         
         int exDocSize = getExcludeDocSize();
