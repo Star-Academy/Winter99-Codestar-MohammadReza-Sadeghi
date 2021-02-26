@@ -13,11 +13,7 @@ public class Main
 
         QuerySearcher qs = new QuerySearcher(invertedIndex);
         HashSet<Integer> result = qs.search(inStr);
-
-        for (Integer d: result)
-        {
-            System.out.println(d);
-        }
+        Output.printSet(result);
     }
 
 }
