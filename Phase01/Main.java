@@ -6,12 +6,10 @@ public class Main
     
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
-        
         InvertedIndex invertedIndex = new InvertedIndex();
-        invertedIndex.readData("EnglishData/");
+        invertedIndex.readAndAddData("EnglishData/");
         
-        String[] inStr = scanner.nextLine().toLowerCase().split(" ");
+        String[] inStr = Tokenizer.readAndTokenize();
 
         QuerySearcher qs = new QuerySearcher(invertedIndex);
         HashSet<Integer> result = qs.search(inStr);
@@ -22,6 +20,4 @@ public class Main
         }
     }
 
-
-    
 }

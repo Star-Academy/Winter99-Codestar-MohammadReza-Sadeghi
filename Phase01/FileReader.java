@@ -3,6 +3,7 @@ import java.io.*;
 
 public class FileReader
 {
+    static String delimiter = "\\A";
     private String path;
     public FileReader(String path)
     {
@@ -25,7 +26,7 @@ public class FileReader
             }
             if (scanner.hasNext())
             {
-                String fileData = scanner.useDelimiter("\\A").next();
+                String fileData = scanner.useDelimiter(delimiter).next();
                 docs.add(fileData.toLowerCase());
             }
             scanner.close();

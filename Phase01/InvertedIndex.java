@@ -10,7 +10,7 @@ public class InvertedIndex
         return this.index;
     }
 
-    public void readData(String dataFolder)
+    public void readAndAddData(String dataFolder)
     {
         final FileReader fileReader = new FileReader(dataFolder);
         ArrayList<String> docs = fileReader.read();
