@@ -10,10 +10,8 @@ public class InvertedIndex
         return this.index;
     }
 
-    public void readAndAddData(String dataFolder)
+    public void addData(ArrayList<String> docs)
     {
-        final FileReader fileReader = new FileReader(dataFolder);
-        ArrayList<String> docs = fileReader.read();
         for (int i = 0; i < docs.size(); i++)
         {
             String[] words = docs.get(i).split("\\W+");

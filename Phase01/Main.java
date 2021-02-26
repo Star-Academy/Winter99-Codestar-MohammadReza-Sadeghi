@@ -7,7 +7,9 @@ public class Main
     public static void main(String[] args)
     {
         InvertedIndex invertedIndex = new InvertedIndex();
-        invertedIndex.readAndAddData("EnglishData/");
+        final FileReader fileReader = new FileReader("EnglishData/");
+        ArrayList<String> docs = fileReader.read();
+        invertedIndex.addData(docs);
         
         String[] inStr = Tokenizer.readAndTokenize();
 
