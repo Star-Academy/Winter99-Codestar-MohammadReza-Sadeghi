@@ -26,17 +26,17 @@ public class QuerySearcher
 
     void setAndWords(String[] inputWords)
     {
-        andOperands.setWords(Tokenizer.extractAndWords(inputWords));
+        andOperands.setWords(InputTokenizer.extractAndWords(inputWords));
     }
 
     void setOrWords(String[] inputWords)
     {
-        orOperands.setWords(Tokenizer.extractOrWords(inputWords));
+        orOperands.setWords(InputTokenizer.extractOrWords(inputWords));
     }
 
     void setExcludeWords(String[] inputWords)
     {
-        excludeOperands.setWords(Tokenizer.extractExcludeWords(inputWords));
+        excludeOperands.setWords(InputTokenizer.extractExcludeWords(inputWords));
     }
 
     void computeAndDocs(String[] inputWords)

@@ -3,18 +3,13 @@ import java.io.*;
 
 public class FileReader
 {
-    static String delimiter = "\\A";
-    private String path;
-    public FileReader(String path)
-    {
-        this.path = path;
-    }
+    private static final String delimiter = "\\A";
 
-    public ArrayList<String> read()
+    public static ArrayList<String> read(String path)
     {
         final File folder = new File(path);
         final File[] listOfFiles = folder.listFiles();
-        ArrayList<String> docs = new ArrayList<>();
+        final ArrayList<String> docs = new ArrayList<>();
         for (File file: listOfFiles)
         {
             Scanner scanner;
@@ -27,7 +22,7 @@ public class FileReader
             if (scanner.hasNext())
             {
                 String fileData = scanner.useDelimiter(delimiter).next();
-                docs.add(fileData.toLowerCase());
+                docs.add(InputTokenizer.tokenize(fileData));
             }
             scanner.close();
         }

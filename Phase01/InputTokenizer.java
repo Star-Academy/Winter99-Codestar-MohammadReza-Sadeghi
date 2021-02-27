@@ -1,22 +1,22 @@
 import java.util.*;
 
-public class Tokenizer
+public class InputTokenizer
 {
     public static String[] readAndTokenize()
     {
         String inputStr = readInputFromUser();
-        return tokenize(inputStr);
+        return tokenizeWithSplit(inputStr);
     }
 
     static String readInputFromUser()
     {
-        Scanner scanner = new Scanner(System.in);
-        String inputStr = scanner.nextLine();
+        final Scanner scanner = new Scanner(System.in);
+        final String inputStr = scanner.nextLine();
         scanner.close();
         return inputStr;
     }
 
-    static String[] tokenize(String inputStr)
+    static String[] tokenizeWithSplit(String inputStr)
     {
         return inputStr.toLowerCase().split(" ");
     }
@@ -46,5 +46,10 @@ public class Tokenizer
             if (w.charAt(0) == '-')
                 exWords.add(w.substring(1));
         return exWords;
+    }
+
+    static String tokenize(String inputStr)
+    {
+        return inputStr.toLowerCase();
     }
 }

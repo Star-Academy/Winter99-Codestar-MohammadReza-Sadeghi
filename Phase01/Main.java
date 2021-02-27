@@ -7,11 +7,10 @@ public class Main
     public static void main(String[] args)
     {
         InvertedIndex invertedIndex = new InvertedIndex();
-        final FileReader fileReader = new FileReader("EnglishData/");
-        ArrayList<String> docs = fileReader.read();
+        ArrayList<String> docs = FileReader.read("EnglishData/");
         invertedIndex.addData(docs);
         
-        String[] inStr = Tokenizer.readAndTokenize();
+        String[] inStr = InputTokenizer.readAndTokenize();
 
         QuerySearcher qs = new QuerySearcher(invertedIndex);
         HashSet<Integer> result = qs.search(inStr);

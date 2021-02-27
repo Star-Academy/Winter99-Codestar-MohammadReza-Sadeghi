@@ -28,12 +28,8 @@ public class InvertedIndex
     {
         HashSet<Integer> docList = index.get(word);
         if (!index.containsKey(word))
-        {
             docList = new HashSet<Integer>();
-            docList.add(doc);
-            index.put(word, docList);
-        }
-        else
-            docList.add(doc);
+        docList.add(doc);
+        index.put(word, docList);
     }
 }
