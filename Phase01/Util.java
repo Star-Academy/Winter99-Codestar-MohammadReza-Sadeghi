@@ -12,12 +12,6 @@ public class Util
      */
     static void and(HashSet<Integer> a, HashSet<Integer> b)
     {
-        // for (Iterator<Integer> i = a.iterator(); i.hasNext(); )
-        // {
-        //     Integer doc = i.next();
-        //     if (!b.contains(doc))
-        //         i.remove();
-        // }
         a.removeIf(doc -> !b.contains(doc));
     }
 
@@ -60,7 +54,6 @@ public class Util
      */
     static int sumOfDocs(ArrayList<String> words, InvertedIndex invertedIndex)
     {
-        // ArrayList<String> exWords = excludeOperands.getWords();
         int sum = 0;
         for (String w: words)
             if (invertedIndex.getIndex().containsKey(w))
@@ -76,13 +69,7 @@ public class Util
      */
     static void excludeByBaseSet(HashSet<Integer> baseSet, ArrayList<String> excludeWords, InvertedIndex invertedIndex)
     {
-        // for (Iterator<Integer> i = baseSet.iterator(); i.hasNext(); )
-        // {
-        //     Integer doc = i.next();
             for (String ew: excludeWords)
-        //         if (invertedIndex.getIndex().get(ew).contains(doc))
-        //             i.remove();
-        // }
         baseSet.removeIf(doc -> invertedIndex.getIndex().get(ew).contains(doc));
     }
 
