@@ -1,0 +1,189 @@
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class TestQuerySearcher
+{
+    String[] createStrArray()
+    {
+        return new String[]{"get", "help", "+illness", "+disease", "-cough"};
+    }
+
+    HashSet<Integer> createHashSet(int addNumber)
+    {
+        HashSet<Integer> hashSet = new HashSet<>();
+        hashSet.add(addNumber);
+        return hashSet;
+    }
+
+    HashMap<String, HashSet<Integer>> createIndex()
+    {
+        HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
+        index.put("get", createHashSet(0));
+        index.put("help", createHashSet(0));
+        index.put("illness", createHashSet(0));
+
+        index.put("disease", createHashSet(1));
+        index.put("cough", createHashSet(1));
+
+        return index;
+    }
+
+    @Test
+    void testSetAndWords()
+    {
+        ArrayList<String> words = new ArrayList<>();
+        words.add("get");
+        words.add("help");
+
+        QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
+        querySearcher.setAndWords(createStrArray());
+        assertEquals(words, querySearcher.getAndOperands().getWords());
+    }
+
+    @Test
+    void testSetExcludeWords()
+    {
+        ArrayList<String> words = new ArrayList<>();
+        words.add("cough");
+
+        QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
+        querySearcher.setExcludeWords(createStrArray());
+        assertEquals(words, querySearcher.getExcludeOperands().getWords());
+    }
+
+    @Test
+    void testSetOrWords()
+    {
+        ArrayList<String> words = new ArrayList<>();
+        words.add("illness");
+        words.add("disease");
+
+        QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
+        querySearcher.setOrWords(createStrArray());
+        assertEquals(words, querySearcher.getOrOperands().getWords());
+    }
+
+    @Test
+    void testComputeAndDocs()
+    {
+        HashSet<Integer> docs = new HashSet<>();
+        docs.add(0);
+
+        HashMap<String, HashSet<Integer>> index = createIndex();
+
+        InvertedIndex invertedIndex = mock(InvertedIndex.class);
+        when(invertedIndex.getIndex()).thenReturn(index);
+
+        QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
+        querySearcher.computeAndDocs(createStrArray());
+        assertEquals(docs, querySearcher.getAndOperands().getDocs());
+
+        querySearcher = new QuerySearcher(invertedIndex);
+        querySearcher.computeAndDocs(new String[]{"a"});
+        assertEquals(new HashSet<Integer>(), querySearcher.getAndOperands().getDocs());
+    }
+
+    @Test
+    void testComputeAndDocs2()
+    {
+        HashMap<String, HashSet<Integer>> index = createIndex();
+        InvertedIndex invertedIndex = mock(InvertedIndex.class);
+        when(invertedIndex.getIndex()).thenReturn(index);
+
+        QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
+        querySearcher.computeAndDocs(createStrArray());
+        assertEquals(new HashSet<Integer>(), querySearcher.getAndOperands().getDocs());
+    }
+
+    @Test
+    void testComputeOrDocs()
+    {
+        HashSet<Integer> docs = new HashSet<>();
+        docs.add(0);
+        docs.add(1);
+
+        HashMap<String, HashSet<Integer>> index = createIndex();
+
+        InvertedIndex invertedIndex = mock(InvertedIndex.class);
+        when(invertedIndex.getIndex()).thenReturn(index);
+
+        QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
+        querySearcher.computeOrDocs(createStrArray());
+        assertEquals(docs, querySearcher.getOrOperands().getDocs());
+    }
+
+    @Test
+    void testAndResults()
+    {
+        HashSet<Integer> docs = createHashSet(0);
+
+        HashSet<Integer> or = createHashSet(0);
+        or.add(1);
+
+        QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
+        querySearcher.getAndOperands().setDocs(createHashSet(0));
+        querySearcher.getOrOperands().setDocs(or);
+
+        ArrayList<String> andWords = new ArrayList<>();
+        andWords.add("get");
+        andWords.add("help");
+        querySearcher.getAndOperands().setWords(andWords);
+
+        ArrayList<String> orWords = new ArrayList<>();
+        orWords.add("illness");
+        orWords.add("disease");
+
+        querySearcher.getOrOperands().setWords(orWords);
+        assertEquals(docs, querySearcher.andResults());
+
+        querySearcher.getAndOperands().setWords(new ArrayList<String>());
+        docs.add(1);
+        assertEquals(docs, querySearcher.andResults());
+
+        querySearcher.getAndOperands().getDocs().add(2);
+        querySearcher.getAndOperands().getDocs().add(1);
+        assertEquals(docs, querySearcher.andResults());
+
+        querySearcher.getOrOperands().setWords(new ArrayList<String>());
+        docs.add(2);
+        assertEquals(docs, querySearcher.andResults());
+    }
+
+    @Test
+    void testRemoveExcludeDocs()
+    {
+        HashMap<String, HashSet<Integer>> index = createIndex();
+        InvertedIndex invertedIndex = mock(InvertedIndex.class);
+        when(invertedIndex.getIndex()).thenReturn(index);
+
+        QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
+        HashSet<Integer> result = createHashSet(0);
+        querySearcher.removeExcludeDocs(createStrArray(), result);
+        assertEquals(createHashSet(0), result);
+
+        querySearcher.removeExcludeDocs(new String[]{"a"}, result);
+        assertEquals(createHashSet(0), result);
+
+        index.get("cough").add(0);
+        querySearcher.removeExcludeDocs(createStrArray(), result);
+        assertEquals(new HashSet<Integer>(), result);
+    }
+
+    @Test
+    void testSearch()
+    {
+        HashMap<String, HashSet<Integer>> index = createIndex();
+        InvertedIndex invertedIndex = mock(InvertedIndex.class);
+        when(invertedIndex.getIndex()).thenReturn(index);
+        QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
+
+        assertEquals(createHashSet(0), querySearcher.search(createStrArray()));
+    }
+}
