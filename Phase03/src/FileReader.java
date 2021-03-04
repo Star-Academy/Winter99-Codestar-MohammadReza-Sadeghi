@@ -4,7 +4,6 @@ import java.io.*;
 public class FileReader
 {
     private static final String delimiter = "\\A";
-    // static HashMap<Integer, String> fileNames = new HashMap<>();
 
     public static ArrayList<String> read(String path) throws FileNotFoundException {
         final File folder = new File(path);
@@ -12,8 +11,7 @@ public class FileReader
         final ArrayList<String> docs = new ArrayList<>();
         for (File file: listOfFiles != null ? listOfFiles : new File[0])
         {
-            Scanner scanner;
-            scanner = new Scanner(file);
+            Scanner scanner = new Scanner(file);
             if (scanner.hasNext())
             {
                 String fileData = scanner.useDelimiter(delimiter).next();

@@ -21,12 +21,11 @@ public class TestFileReader
             docs.add("h>subject to a high-voltag");
 
             assertEquals(docs, FileReader.read("SampleData/"));
+    }
+
+    @Test
+    void testRead2() throws FileNotFoundException {
             assertEquals(new ArrayList<>(), FileReader.read("avc"));
     }
 
-//    @Test
-//    void testRead2()
-//    {
-//        assertEquals(docs, FileReader.read("SampleData2/"));
-//    }
 }
