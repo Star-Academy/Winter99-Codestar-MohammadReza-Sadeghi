@@ -1,2 +1,5 @@
 EnglishData/
 *.class
+obj/
+bin/
+.vs/
