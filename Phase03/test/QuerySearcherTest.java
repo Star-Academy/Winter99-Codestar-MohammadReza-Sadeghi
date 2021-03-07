@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,29 +12,30 @@ import static org.mockito.Mockito.when;
 
 public class QuerySearcherTest
 {
+    HashMap<String, HashSet<Integer>> index;
+
     String[] createStrArray()
     {
         return new String[]{"get", "help", "+illness", "+disease", "-cough"};
     }
 
-    HashSet<Integer> createHashSet(int addNumber)
+    static HashSet<Integer> createHashSet(int addNumber)
     {
         HashSet<Integer> hashSet = new HashSet<>();
         hashSet.add(addNumber);
         return hashSet;
     }
 
-    HashMap<String, HashSet<Integer>> createIndex()
+    @BeforeEach
+    public void createIndex()
     {
-        HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
+        index = new HashMap<>();
         index.put("get", createHashSet(0));
         index.put("help", createHashSet(0));
         index.put("illness", createHashSet(0));
 
         index.put("disease", createHashSet(1));
         index.put("cough", createHashSet(1));
-
-        return index;
     }
 
     @Test
@@ -76,8 +79,6 @@ public class QuerySearcherTest
         HashSet<Integer> docs = new HashSet<>();
         docs.add(0);
 
-        HashMap<String, HashSet<Integer>> index = createIndex();
-
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
 
@@ -89,7 +90,6 @@ public class QuerySearcherTest
     @Test
     void computeAndDocsTest2()
     {
-        HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
 
@@ -105,8 +105,6 @@ public class QuerySearcherTest
         HashSet<Integer> docs = new HashSet<>();
         docs.add(0);
         docs.add(1);
-
-        HashMap<String, HashSet<Integer>> index = createIndex();
 
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
@@ -203,7 +201,6 @@ public class QuerySearcherTest
     @Test
     void removeExcludeDocsTest()
     {
-        HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
 
@@ -216,7 +213,6 @@ public class QuerySearcherTest
     @Test
     void removeExcludeDocsTest2()
     {
-        HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
 
@@ -230,7 +226,6 @@ public class QuerySearcherTest
     @Test
     void removeExcludeDocsTest3()
     {
-        HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
 
@@ -245,7 +240,6 @@ public class QuerySearcherTest
     @Test
     void searchTest()
     {
-        HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
         when(invertedIndex.getIndex()).thenReturn(index);
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
