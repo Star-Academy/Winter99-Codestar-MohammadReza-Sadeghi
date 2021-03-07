@@ -7,15 +7,16 @@ public class FileReader
 
     public static ArrayList<String> read(String path) throws FileNotFoundException {
         final File folder = new File(path);
-        final File[] listOfFiles = folder.listFiles();
+         File[] listOfFiles = folder.listFiles();
+        listOfFiles = listOfFiles != null ? listOfFiles : new File[0];
         final ArrayList<String> docs = new ArrayList<>();
-        for (File file: listOfFiles != null ? listOfFiles : new File[0])
+        for (File file: listOfFiles)
         {
             Scanner scanner = new Scanner(file);
             if (scanner.hasNext())
             {
                 String fileData = scanner.useDelimiter(delimiter).next();
-                docs.add(InputTokenizer.tokenize(fileData));
+                docs.add(Tokenizer.tokenize(fileData));
             }
             scanner.close();
         }

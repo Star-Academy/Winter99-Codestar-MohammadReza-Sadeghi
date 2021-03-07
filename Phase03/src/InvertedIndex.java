@@ -4,6 +4,7 @@ import java.io.*;
 public class InvertedIndex
 {
     private HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
+    final static String documentSplit = "\\W+";
 
     HashMap<String, HashSet<Integer>> getIndex()
     {
@@ -14,7 +15,7 @@ public class InvertedIndex
     {
         for (int i = 0; i < docs.size(); i++)
         {
-            String[] words = docs.get(i).split("\\W+");
+            String[] words = docs.get(i).split(documentSplit);
             for (String word : words)
                 if (!word.equals(""))
                     addToIndex(word, i);

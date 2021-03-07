@@ -1,24 +1,14 @@
-import java.util.*;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
-public class InputTokenizer
+import java.util.ArrayList;
+
+public class Tokenizer
 {
-    public static String[] readAndTokenize()
-    {
-        String inputStr = readInputFromUser();
-        return tokenizeWithSplit(inputStr);
-    }
-
-    static String readInputFromUser()
-    {
-        final Scanner scanner = new Scanner(System.in);
-        final String inputStr = scanner.nextLine();
-        scanner.close();
-        return inputStr;
-    }
+    final static String whiteSpaceSplit = "\\s+";
 
     static String[] tokenizeWithSplit(String inputStr)
     {
-        return inputStr.toLowerCase().split("\\s+");
+        return inputStr.toLowerCase().split(whiteSpaceSplit);
     }
 
     static ArrayList<String> extractAndWords(String[] inputWords)
