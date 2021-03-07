@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class TestInvertedIndex
+public class InvertedIndexTest
 {
     HashSet<Integer> createHashSet(int addNumber)
     {
@@ -15,7 +15,7 @@ public class TestInvertedIndex
     }
 
     @Test
-    void testAddData()
+    void addDataTest()
     {
         ArrayList<String> docs = new ArrayList<>();
         docs.add("o talk.politics");
@@ -36,7 +36,7 @@ public class TestInvertedIndex
     }
 
     @Test
-    void testAddToIndex()
+    void addToIndexTest()
     {
         HashMap<String, HashSet<Integer>> index = new HashMap<String, HashSet<Integer>>();
         index.put("N3JXP", createHashSet(197));

@@ -9,10 +9,10 @@ import java.util.HashSet;
 import static com.sun.javaws.JnlpxArgs.verify;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestOutput
+public class OutputTest
 {
     @Test
-    void testPrintSet()
+    void printSetTest()
     {
         HashSet<Integer> hashSet = new HashSet<>();
         hashSet.add(2);

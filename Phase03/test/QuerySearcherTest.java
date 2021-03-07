@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TestQuerySearcher
+public class QuerySearcherTest
 {
     String[] createStrArray()
     {
@@ -36,7 +36,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testSetAndWords()
+    void setAndWordsTest()
     {
         ArrayList<String> words = new ArrayList<>();
         words.add("get");
@@ -48,7 +48,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testSetExcludeWords()
+    void setExcludeWordsTest()
     {
         ArrayList<String> words = new ArrayList<>();
         words.add("cough");
@@ -59,7 +59,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testSetOrWords()
+    void setOrWordsTest()
     {
         ArrayList<String> words = new ArrayList<>();
         words.add("illness");
@@ -71,7 +71,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testComputeAndDocs()
+    void computeAndDocsTest()
     {
         HashSet<Integer> docs = new HashSet<>();
         docs.add(0);
@@ -87,7 +87,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testComputeAndDocs2()
+    void computeAndDocsTest2()
     {
         HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
@@ -100,7 +100,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testComputeOrDocs()
+    void computeOrDocsTest()
     {
         HashSet<Integer> docs = new HashSet<>();
         docs.add(0);
@@ -117,7 +117,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testAndResults()
+    void andResultsTest()
     {
         HashSet<Integer> docs = createHashSet(0);
 
@@ -137,7 +137,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testAndResults2()
+    void andResultsTest2()
     {
         HashSet<Integer> docs = createHashSet(0);
         docs.add(1);
@@ -154,7 +154,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testAndResults3()
+    void andResultsTest3()
     {
         HashSet<Integer> docs = createHashSet(0);
         docs.add(1);
@@ -179,7 +179,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testAndResults4()
+    void andResultsTest4()
     {
         HashSet<Integer> docs = createHashSet(0);
         docs.add(1);
@@ -201,7 +201,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testRemoveExcludeDocs()
+    void removeExcludeDocsTest()
     {
         HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
@@ -214,7 +214,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testRemoveExcludeDocs2()
+    void removeExcludeDocsTest2()
     {
         HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
@@ -228,7 +228,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testRemoveExcludeDocs3()
+    void removeExcludeDocsTest3()
     {
         HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);
@@ -243,7 +243,7 @@ public class TestQuerySearcher
     }
 
     @Test
-    void testSearch()
+    void searchTest()
     {
         HashMap<String, HashSet<Integer>> index = createIndex();
         InvertedIndex invertedIndex = mock(InvertedIndex.class);

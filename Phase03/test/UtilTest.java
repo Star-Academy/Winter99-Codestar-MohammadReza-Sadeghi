@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.plugins.MockMaker;
 
 
-public class TestUilt
+public class UtilTest
 {
     HashSet<Integer> getHashSet1()
     {
@@ -66,7 +66,7 @@ public class TestUilt
     }
 
     @Test
-    void testAnd()
+    void andTest()
     {
         HashSet<Integer> a = getHashSet1();
         HashSet<Integer> b = getHashSet2();
@@ -79,7 +79,7 @@ public class TestUilt
     }
 
     @Test
-    void testOr()
+    void orTest()
     {
         HashSet<Integer> a = getHashSet1();
         HashSet<Integer> b = getHashSet2();
@@ -98,7 +98,7 @@ public class TestUilt
     }
 
     @Test
-    void testFindMinWord()
+    void findMinWordTest()
     {
         HashMap<String, HashSet<Integer>> index = getIndex1();
 
@@ -114,7 +114,7 @@ public class TestUilt
     }
 
     @Test
-    void testFindMinWord2()
+    void findMinWordTest2()
     {
         HashMap<String, HashSet<Integer>> index = getIndex1();
 
@@ -130,7 +130,7 @@ public class TestUilt
     }
 
     @Test
-    void testSumOfDocs()
+    void sumOfDocsTest()
     {
         HashMap<String, HashSet<Integer>> index = getIndex1();
 
@@ -146,7 +146,7 @@ public class TestUilt
     }
 
     @Test
-    void testExcludeByBaseSet()
+    void excludeByBaseSetTest()
     {
         HashMap<String, HashSet<Integer>> index = getIndex1();
 
@@ -169,7 +169,7 @@ public class TestUilt
     }
 
     @Test
-    void testExcludeByExDocs()
+    void excludeByExDocsTest()
     {
         HashMap<String, HashSet<Integer>> index = getIndex1();
 
