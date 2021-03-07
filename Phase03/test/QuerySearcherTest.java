@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,28 +13,16 @@ public class QuerySearcherTest
 {
     HashMap<String, HashSet<Integer>> index;
 
-    String[] createStrArray()
-    {
-        return new String[]{"get", "help", "+illness", "+disease", "-cough"};
-    }
-
-    static HashSet<Integer> createHashSet(int addNumber)
-    {
-        HashSet<Integer> hashSet = new HashSet<>();
-        hashSet.add(addNumber);
-        return hashSet;
-    }
-
     @BeforeEach
     public void createIndex()
     {
         index = new HashMap<>();
-        index.put("get", createHashSet(0));
-        index.put("help", createHashSet(0));
-        index.put("illness", createHashSet(0));
+        index.put("get", Creator.createHashSet(0));
+        index.put("help", Creator.createHashSet(0));
+        index.put("illness", Creator.createHashSet(0));
 
-        index.put("disease", createHashSet(1));
-        index.put("cough", createHashSet(1));
+        index.put("disease", Creator.createHashSet(1));
+        index.put("cough", Creator.createHashSet(1));
     }
 
     @Test
@@ -46,7 +33,7 @@ public class QuerySearcherTest
         words.add("help");
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
-        querySearcher.setAndWords(createStrArray());
+        querySearcher.setAndWords(Creator.createStrArray());
         assertEquals(words, querySearcher.getAndOperands().getWords());
     }
 
@@ -57,7 +44,7 @@ public class QuerySearcherTest
         words.add("cough");
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
-        querySearcher.setExcludeWords(createStrArray());
+        querySearcher.setExcludeWords(Creator.createStrArray());
         assertEquals(words, querySearcher.getExcludeOperands().getWords());
     }
 
@@ -69,7 +56,7 @@ public class QuerySearcherTest
         words.add("disease");
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
-        querySearcher.setOrWords(createStrArray());
+        querySearcher.setOrWords(Creator.createStrArray());
         assertEquals(words, querySearcher.getOrOperands().getWords());
     }
 
@@ -83,7 +70,7 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
 
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
-        querySearcher.computeAndDocs(createStrArray());
+        querySearcher.computeAndDocs(Creator.createStrArray());
         assertEquals(docs, querySearcher.getAndOperands().getDocs());
     }
 
@@ -110,20 +97,20 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
 
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
-        querySearcher.computeOrDocs(createStrArray());
+        querySearcher.computeOrDocs(Creator.createStrArray());
         assertEquals(docs, querySearcher.getOrOperands().getDocs());
     }
 
     @Test
     void andResultsTest()
     {
-        HashSet<Integer> docs = createHashSet(0);
+        HashSet<Integer> docs = Creator.createHashSet(0);
 
-        HashSet<Integer> or = createHashSet(0);
+        HashSet<Integer> or = Creator.createHashSet(0);
         or.add(1);
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
-        querySearcher.getAndOperands().setDocs(createHashSet(0));
+        querySearcher.getAndOperands().setDocs(Creator.createHashSet(0));
         querySearcher.getOrOperands().setDocs(or);
 
         ArrayList<String> andWords = new ArrayList<>();
@@ -137,14 +124,14 @@ public class QuerySearcherTest
     @Test
     void andResultsTest2()
     {
-        HashSet<Integer> docs = createHashSet(0);
+        HashSet<Integer> docs = Creator.createHashSet(0);
         docs.add(1);
 
-        HashSet<Integer> or = createHashSet(0);
+        HashSet<Integer> or = Creator.createHashSet(0);
         or.add(1);
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
-        querySearcher.getAndOperands().setDocs(createHashSet(0));
+        querySearcher.getAndOperands().setDocs(Creator.createHashSet(0));
         querySearcher.getOrOperands().setDocs(or);
 
         querySearcher.getAndOperands().setWords(new ArrayList<String>());
@@ -154,14 +141,14 @@ public class QuerySearcherTest
     @Test
     void andResultsTest3()
     {
-        HashSet<Integer> docs = createHashSet(0);
+        HashSet<Integer> docs = Creator.createHashSet(0);
         docs.add(1);
 
-        HashSet<Integer> and = createHashSet(0);
+        HashSet<Integer> and = Creator.createHashSet(0);
         and.add(2);
         and.add(1);
 
-        HashSet<Integer> or = createHashSet(0);
+        HashSet<Integer> or = Creator.createHashSet(0);
         or.add(1);
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
@@ -179,15 +166,15 @@ public class QuerySearcherTest
     @Test
     void andResultsTest4()
     {
-        HashSet<Integer> docs = createHashSet(0);
+        HashSet<Integer> docs = Creator.createHashSet(0);
         docs.add(1);
         docs.add(2);
 
-        HashSet<Integer> and = createHashSet(0);
+        HashSet<Integer> and = Creator.createHashSet(0);
         and.add(2);
         and.add(1);
 
-        HashSet<Integer> or = createHashSet(0);
+        HashSet<Integer> or = Creator.createHashSet(0);
         or.add(1);
 
         QuerySearcher querySearcher = new QuerySearcher(new InvertedIndex());
@@ -205,9 +192,9 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
 
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
-        HashSet<Integer> result = createHashSet(0);
-        querySearcher.removeExcludeDocs(createStrArray(), result);
-        assertEquals(createHashSet(0), result);
+        HashSet<Integer> result = Creator.createHashSet(0);
+        querySearcher.removeExcludeDocs(Creator.createStrArray(), result);
+        assertEquals(Creator.createHashSet(0), result);
     }
 
     @Test
@@ -217,10 +204,10 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
 
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
-        HashSet<Integer> result = createHashSet(0);
+        HashSet<Integer> result = Creator.createHashSet(0);
 
         querySearcher.removeExcludeDocs(new String[]{"a"}, result);
-        assertEquals(createHashSet(0), result);
+        assertEquals(Creator.createHashSet(0), result);
     }
 
     @Test
@@ -230,10 +217,10 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
 
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
-        HashSet<Integer> result = createHashSet(0);
+        HashSet<Integer> result = Creator.createHashSet(0);
 
         index.get("cough").add(0);
-        querySearcher.removeExcludeDocs(createStrArray(), result);
+        querySearcher.removeExcludeDocs(Creator.createStrArray(), result);
         assertEquals(new HashSet<Integer>(), result);
     }
 
@@ -244,6 +231,6 @@ public class QuerySearcherTest
         when(invertedIndex.getIndex()).thenReturn(index);
         QuerySearcher querySearcher = new QuerySearcher(invertedIndex);
 
-        assertEquals(createHashSet(0), querySearcher.search(createStrArray()));
+        assertEquals(Creator.createHashSet(0), querySearcher.search(Creator.createStrArray()));
     }
 }
