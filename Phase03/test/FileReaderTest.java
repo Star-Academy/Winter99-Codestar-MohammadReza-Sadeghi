@@ -20,7 +20,7 @@ public class FileReaderTest
             docs.add("is what got me");
             docs.add("h>subject to a high-voltag");
 
-            assertEquals(docs, FileReader.read("SampleData/"));
+            assertEquals(docs, FileReader.read("test/SampleData/"));
     }
 
     @Test
