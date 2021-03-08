@@ -11,10 +11,10 @@ public class Main
         invertedIndex.addData(docs);
         
         String[] inStr = InputTokenizer.readAndTokenize();
-
+        
         QuerySearcher qs = new QuerySearcher(invertedIndex);
         HashSet<Integer> result = qs.search(inStr);
-        Output.printSet(result);
+        Output.printSet(result, docs);
     }
 
 }
