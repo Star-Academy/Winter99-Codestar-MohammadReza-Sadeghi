@@ -1,5 +1,9 @@
 EnglishData/
 *.class
+*.iml
+*.jar
+out/
+.idea/
 obj/
 bin/
 .vs/
