@@ -8,3 +8,4 @@ obj/
 bin/
 .vs/
 Phase01/
+*.json
