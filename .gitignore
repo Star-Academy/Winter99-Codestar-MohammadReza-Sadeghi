@@ -4,3 +4,6 @@ EnglishData/
 *.jar
 out/
 .idea/
+obj/
+bin/
+.vs/
