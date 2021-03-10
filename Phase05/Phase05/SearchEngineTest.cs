@@ -13,7 +13,7 @@ namespace Test
         {
             var query = Creator.CreateQueryString();
             var mockIndex = new Mock<InvertedIndex>();
-            mockIndex.SetupGet(x => x.Index).Returns(Creator.CreateIndex);
+            mockIndex.SetupGet(x => x.Index).Returns(Creator.CreateIndex());
             Assert.Equal(new HashSet<int> { 0 }, new SearchEngine(mockIndex.Object).SearchQuery(query));
         }
     }
