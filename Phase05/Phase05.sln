@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phase05", "Phase05\Phase05.csproj", "{9B8CD9A3-653B-41A7-8DAF-4B52D4952972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Phase05\Test.csproj", "{9B8CD9A3-653B-41A7-8DAF-4B52D4952972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search", "Search\Search.csproj", "{6F59B919-33FF-4111-B9B7-ED2DA1CD3F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Search", "Search\Search.csproj", "{6F59B919-33FF-4111-B9B7-ED2DA1CD3F64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

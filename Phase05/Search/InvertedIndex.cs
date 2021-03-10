@@ -5,7 +5,7 @@ namespace Phase05
 {
     public class InvertedIndex
     {
-        public Dictionary<string, ArrayList> Index { get; set; }
+        public Dictionary<string, ArrayList> Index { get; }
 
         public InvertedIndex()
         {

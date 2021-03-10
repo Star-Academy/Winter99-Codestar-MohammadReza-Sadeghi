@@ -28,5 +28,20 @@ namespace Phase05
             index.Add("conclusion", new ArrayList { 1, 2});
             return index;
         }
+
+        public static string CreateStr()
+        {
+            return "tus in  some people8. There is a nati";
+        }
+
+        public static string CreateQueryString()
+        {
+            return "-issue +conclusion +woultake i"; 
+        }
+
+        public static string[] CreateQueryArray()
+        {
+            return new[] { "-people8", "+is", "+som", "tus" };
+        }
     }
 }
