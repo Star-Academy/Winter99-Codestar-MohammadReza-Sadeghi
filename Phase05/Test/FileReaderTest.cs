@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Phase05
@@ -8,8 +8,8 @@ namespace Phase05
         [Fact]
         public void ReadFromFolderTest()
         {
-            string path = "../../../SampleData/";
-            ArrayList documents = new ArrayList();
+            string path = @"../../../../Test/SampleData/";
+            var documents = new List<string>();
             documents.Add("is what got me");
             documents.Add("h>subject to a high-voltag");
             Assert.Equal(documents, FileReader.ReadFromFolder(path));
@@ -18,8 +18,8 @@ namespace Phase05
         [Fact]
         public void ReadFromFolderTest2()
         {
-            string path = "../../../SampleData/";
-            Assert.Equal(new ArrayList(), FileReader.ReadFromFolder(path));
+            string path = "../../../abc/";
+            Assert.Equal(new List<string> { }, FileReader.ReadFromFolder(path));
         }
     }
 }

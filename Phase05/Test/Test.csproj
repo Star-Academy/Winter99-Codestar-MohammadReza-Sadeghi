@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Search\Search.csproj" />
+    <ProjectReference Include="..\Phase05\Phase05.csproj" />
   </ItemGroup>
 
 </Project>

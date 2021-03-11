@@ -16,27 +16,27 @@ namespace Phase05
         public void SplitDocumentTest()
         {
             string doc = Creator.CreateStr();
-            Assert.Equal(new[] { "tus", "in", "som", "people8", "There", "is", "a", "nati" }, Tokenizer.SplitDocument(doc));
+            Assert.Equal(new[] { "tus", "in", "some", "people8", "There", "is", "a", "nati" }, Tokenizer.SplitDocument(doc));
         }
 
         [Fact]
         public void SplitInputTest()
         {
             string doc = Creator.CreateStr();
-            Assert.Equal(new[] { "tus", "in", "som", "people8.", "There", "is", "a", "nati" }, Tokenizer.SplitInput(doc));
+            Assert.Equal(new[] { "tus", "in", "some", "people8.", "There", "is", "a", "nati" }, Tokenizer.SplitInput(doc));
         }
 
         [Fact]
         public void ExtractQueryTest()
         {
-            var query = Creator.CreateQueryArray();
+            var query = Creator.CreateQueryString();
             List<string> andWords = new List<string>();
             List<string> orWords = new List<string>();
             List<string> exWords = new List<string>();
             (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
-            Assert.Equal(new List<string> { "tus" }, andWords);
-            Assert.Equal(new List<string> { "is", "som" }, orWords);
-            Assert.Equal(new List<string> { "people8" }, exWords);
+            Assert.Equal(new List<string> { "i" }, andWords);
+            Assert.Equal(new List<string> { "conclusion", "woultake" }, orWords);
+            Assert.Equal(new List<string> { "issue" }, exWords);
         }
     }
 }

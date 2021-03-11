@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Phase05
 {
@@ -18,18 +19,19 @@ namespace Phase05
         [Fact]
         public void AddToIndexTest()
         {
-            var index = new Dictionary<string, ArrayList>();
-            index.Add("chocolate", new ArrayList { 3 });
+            var index = new Dictionary<string, HashSet<int>>();
+            index.Add("chocolate", new HashSet<int> { 3 });
             var invertedIndex = new InvertedIndex();
             invertedIndex.AddToIndex("chocolate", 3);
             Assert.Equal(index, invertedIndex.Index);
         }
 
+        [Fact]
         public void AddToIndexTest2()
         {
-            var index = new Dictionary<string, ArrayList>();
-            index.Add("chocolate", new ArrayList { 3 });
-            index.Add("place", new ArrayList { 3 });
+            var index = new Dictionary<string, HashSet<int>>();
+            index.Add("chocolate", new HashSet<int> { 3 });
+            index.Add("place", new HashSet<int> { 3 });
             var invertedIndex = new InvertedIndex();
             invertedIndex.AddToIndex("chocolate", 3);
             invertedIndex.AddToIndex("place", 3);

@@ -1,10 +1,8 @@
 ﻿using Xunit;
 using Moq;
-using Phase05;
 using System.Collections.Generic;
-using Search;
 
-namespace Test
+namespace Phase05
 {
     public class OperationsTest
     {
@@ -34,21 +32,21 @@ namespace Test
         public void AndWordsTest2()
         {
             var words = new List<string> { "from", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { 0 }, Operations.AndWords(words, mockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, mockIndex.Object));
         }
 
         [Fact]
         public void AndWordsTest3()
         {
             var words = new List<string> { "overstating", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { 0 }, Operations.AndWords(words, new HashSet<int> { 1 }, mockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, new HashSet<int> { 1 }, mockIndex.Object));
         }
 
         [Fact]
         public void AndWordsTest4()
         {
             var words = new List<string> { "from", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { 0 }, Operations.AndWords(words, new HashSet<int> { }, mockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, new HashSet<int> { }, mockIndex.Object));
         }
 
         [Fact]
@@ -56,7 +54,7 @@ namespace Test
         {
             var words = new List<string> { "overstating", "conclusion" };
             var baseSet = new HashSet<int> { 8, 0, 5, 6 };
-            Assert.Equal(new HashSet<int> { }, Operations.ExcludeWords(baseSet, words, mockIndex.Object));
+            Assert.Equal(new HashSet<int> { 8, 5, 6 }, Operations.ExcludeWords(baseSet, words, mockIndex.Object));
         }
     }
 }
