@@ -13,5 +13,10 @@ namespace Phase05
                 Console.WriteLine(s);
             }
         }
+
+        public static void PrintString(string str)
+        {
+            Console.WriteLine(str);
+        }
     }
 }

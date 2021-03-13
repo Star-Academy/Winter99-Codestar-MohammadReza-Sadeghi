@@ -20,7 +20,7 @@ namespace Phase05
             }
             catch 
             {
-                Console.WriteLine("Invalid path :)");
+                Output.PrintString("Invalid path :)");
             }
             return documents;
         }
