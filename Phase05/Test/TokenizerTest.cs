@@ -27,7 +27,7 @@ namespace Phase05
         }
 
         [Fact]
-        public void ExtractQueryTest()
+        public void ExtractQueryTest1()
         {
             var query = Creator.CreateQueryString();
             List<string> andWords = new List<string>();
@@ -35,7 +35,27 @@ namespace Phase05
             List<string> exWords = new List<string>();
             (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
             Assert.Equal(new List<string> { "i" }, andWords);
+        }
+
+        [Fact]
+        public void ExtractQueryTest2()
+        {
+            var query = Creator.CreateQueryString();
+            List<string> andWords = new List<string>();
+            List<string> orWords = new List<string>();
+            List<string> exWords = new List<string>();
+            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
             Assert.Equal(new List<string> { "conclusion", "woultake" }, orWords);
+        }
+
+        [Fact]
+        public void ExtractQueryTest3()
+        {
+            var query = Creator.CreateQueryString();
+            List<string> andWords = new List<string>();
+            List<string> orWords = new List<string>();
+            List<string> exWords = new List<string>();
+            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
             Assert.Equal(new List<string> { "issue" }, exWords);
         }
     }
