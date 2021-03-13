@@ -6,12 +6,12 @@ namespace Phase05
 {
     public class FileReader
     {
-        public static List<string> ReadFromFolder(string PathFolder)
+        public static List<string> ReadFromFolder(string pathFolder)
         {
             var documents = new List<string>();
             try
             {
-                foreach (string file in Directory.EnumerateFiles(PathFolder, "*"))
+                foreach (string file in Directory.EnumerateFiles(pathFolder, "*"))
                 {
                     string content = File.ReadAllText(file);
                     if (!content.Equals(""))

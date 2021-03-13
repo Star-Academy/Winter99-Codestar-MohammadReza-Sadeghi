@@ -12,11 +12,11 @@ namespace Phase05
             Index = new Dictionary<string, HashSet<int>>();
         }
 
-        public void CreateIndex(List<string> Documents)
+        public void CreateIndex(List<string> documents)
         {
-            for (int i = 0; i < Documents.Count; i++)
+            for (int i = 0; i < documents.Count; i++)
             {
-                var tokenizedDoc = Tokenizer.Tokenize(Documents[i]);
+                var tokenizedDoc = Tokenizer.Tokenize(documents[i]);
                 var docWords = Tokenizer.SplitDocument(tokenizedDoc);
                 foreach (string word in docWords)
                 {

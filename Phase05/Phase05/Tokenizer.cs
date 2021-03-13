@@ -8,25 +8,25 @@ namespace Phase05
     {
         private static readonly string DocumentRegex = "\\w+";
 
-        public static string Tokenize(string Str)
+        public static string Tokenize(string str)
         {
-            return Str.ToLower();
+            return str.ToLower();
         }
 
-        public static string[] SplitDocument(string Document)
+        public static string[] SplitDocument(string document)
         {
-            return Regex.Matches(Document, DocumentRegex).OfType<Match>().Select(m => m.Value).ToArray();
+            return Regex.Matches(document, DocumentRegex).OfType<Match>().Select(m => m.Value).ToArray();
         }
 
-        public static string[] SplitInput(string Input)
+        public static string[] SplitInput(string input)
         {
-            return Regex.Split(Input, "\\s+");
+            return Regex.Split(input, "\\s+");
         }
 
-        public static (List<string>, List<string>, List<string>) ExtractQuery(string Query)
+        public static (List<string>, List<string>, List<string>) ExtractQuery(string query)
         {
-            Query = Tokenizer.Tokenize(Query);
-            var queryWords = Tokenizer.SplitInput(Query);
+            query = Tokenizer.Tokenize(query);
+            var queryWords = Tokenizer.SplitInput(query);
             var andWords = new List<string>();
             var orWords = new List<string>();
             var exWords = new List<string>();

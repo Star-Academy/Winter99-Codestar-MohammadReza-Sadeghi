@@ -4,55 +4,55 @@ namespace Phase05
 {
     public class Operations
     {
-        public static HashSet<int> OrWords(List<string> Words, InvertedIndex Index)
+        public static HashSet<int> OrWords(List<string> words, InvertedIndex index)
         {
             var orDocs = new HashSet<int>();
-            foreach (string word in Words)
+            foreach (string word in words)
             {
-                if (Index.Index.ContainsKey(word))
+                if (index.Index.ContainsKey(word))
                 {
-                    var wordDocs = Index.Index[word];
+                    var wordDocs = index.Index[word];
                     orDocs.UnionWith(wordDocs);
                 }
             }
             return orDocs;
         }
 
-        public static HashSet<int> AndWords(List<string> Words, HashSet<int> BaseSet, InvertedIndex Index)
+        public static HashSet<int> AndWords(List<string> words, HashSet<int> baseSet, InvertedIndex index)
         {
-            if (BaseSet.Count == 0)
+            if (baseSet.Count == 0)
                 return new HashSet<int>();
-            var andDocs = AndWords(Words, Index);
-            andDocs.IntersectWith(BaseSet);
+            var andDocs = AndWords(words, index);
+            andDocs.IntersectWith(baseSet);
             return andDocs;
         }
 
-        public static HashSet<int> AndWords(List<string> Words, InvertedIndex Index)
+        public static HashSet<int> AndWords(List<string> words, InvertedIndex index)
         {
             var andDocs = new HashSet<int>();
-            for (int i = 0; i < Words.Count; i++)
+            for (int i = 0; i < words.Count; i++)
             {
-                if (!Index.Index.ContainsKey(Words[i]))
+                if (!index.Index.ContainsKey(words[i]))
                     return new HashSet<int>();
                 if (i == 0)
-                    andDocs = new HashSet<int>(Index.Index[Words[i]]);
+                    andDocs = new HashSet<int>(index.Index[words[i]]);
                 else
                 {
-                    var wordDocs = Index.Index[Words[i]];
+                    var wordDocs = index.Index[words[i]];
                     andDocs.IntersectWith(wordDocs);
                 }
             }
             return andDocs;
         }
 
-        public static HashSet<int> ExcludeWords(HashSet<int> BaseSet, List<string> Words, InvertedIndex Index)
+        public static HashSet<int> ExcludeWords(HashSet<int> baseSet, List<string> words, InvertedIndex index)
         {
-            foreach (string word in Words)
+            foreach (string word in words)
             {
-                if (Index.Index.ContainsKey(word))
-                    BaseSet.ExceptWith(Index.Index[word]);
+                if (index.Index.ContainsKey(word))
+                    baseSet.ExceptWith(index.Index[word]);
             }
-            return BaseSet;
+            return baseSet;
         }
     }
 }

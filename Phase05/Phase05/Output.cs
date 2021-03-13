@@ -6,9 +6,9 @@ namespace Phase05
 {
     public class Output
     {
-        public static void PrintSet(HashSet<int> Result)
+        public static void PrintSet(HashSet<int> result)
         {
-            foreach (int s in Result)
+            foreach (int s in result)
             {
                 Console.WriteLine(s);
             }
