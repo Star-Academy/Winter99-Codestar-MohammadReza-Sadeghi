@@ -4,12 +4,15 @@ using System.Linq;
 
 namespace Phase04
 {
+
     class Program
     {
+        private static string StudentsJsonPath = "../../../Students.json";
+        private static string ScoresJsonPath = "../../../Scores.json";
         static void Main(string[] args)
         {
-            var students = Parser.jsonToList<Student>(FileReader.Read("../../../Students.json"));
-            var scores = Parser.jsonToList<Mark>(FileReader.Read("../../../Scores.json"));
+            var students = Parser.jsonToList<Student>(FileReader.Read(StudentsJsonPath));
+            var scores = Parser.jsonToList<Mark>(FileReader.Read(ScoresJsonPath));
             var firstThreeAverages = FindTop3Students(students, scores);
             Output.PrintList(firstThreeAverages);    
         }
