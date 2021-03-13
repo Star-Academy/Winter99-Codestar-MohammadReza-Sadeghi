@@ -14,9 +14,9 @@ namespace Phase04
             Output.PrintList(firstThreeAverages);    
         }
 
-        static IEnumerable<StudentAverage> FindTop3Students(List<Student> Students, List<Mark> Scores)
+        static IEnumerable<StudentAverage> FindTop3Students(List<Student> students, List<Mark> scores)
         {
-            return Students.GroupJoin(Scores, st => st.StudentNumber, sc => sc.StudentNumber, (st, sc) => new StudentAverage (st.FirstName, st.LastName,sc.Average(s => s.Score))).OrderByDescending(s => s.Average).Take(3);
+            return students.GroupJoin(scores, st => st.StudentNumber, sc => sc.StudentNumber, (st, sc) => new StudentAverage (st.FirstName, st.LastName,sc.Average(s => s.Score))).OrderByDescending(s => s.Average).Take(3);
         }
 
     }

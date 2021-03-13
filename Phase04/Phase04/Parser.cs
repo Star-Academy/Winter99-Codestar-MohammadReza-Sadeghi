@@ -6,9 +6,9 @@ namespace Phase04
 {
     class Parser
     {
-        public static List<T> jsonToList<T>(string JsonStr)
+        public static List<T> jsonToList<T>(string jsonStr)
         {
-            return JsonConvert.DeserializeObject<List<T>>(JsonStr);
+            return JsonConvert.DeserializeObject<List<T>>(jsonStr);
         }
     }
 }

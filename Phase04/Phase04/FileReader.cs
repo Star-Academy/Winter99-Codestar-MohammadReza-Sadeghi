@@ -6,9 +6,9 @@ namespace Phase04
 {
     class FileReader
     {
-        public static string Read(string FilePath)
+        public static string Read(string filePath)
         {
-            return File.ReadAllText(FilePath);
+            return File.ReadAllText(filePath);
         }
     }
 }
