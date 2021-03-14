@@ -6,4 +6,9 @@ out/
 .idea/
 obj/
 bin/
+<<<<<<< HEAD
 .vs/
+=======
+.vs/
+*.json
+>>>>>>> Phase04-CSharp
