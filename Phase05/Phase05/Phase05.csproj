@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <PackageId>SearchEngine_team3</PackageId>
+    <PackageId>StarAcademy.MohammadRezaSadeghi.SearchEngine</PackageId>
     <Authors>MohammadReza Sadeghi</Authors>
     <Company>Star Academy</Company>
   </PropertyGroup>
