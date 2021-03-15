@@ -21,11 +21,11 @@ jobs:
       id: version
       uses: pozetroninc/github-action-get-latest-release@master
       with:
-        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi/tree/phase06-CICD
+        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi
 
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
-      working-directory: Phase05\Phase05
+      working-directory: Phase05/Phase05
 
     - name: Publish NuGet Package
       run: dotnet nuget push ./**/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
