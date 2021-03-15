@@ -11,7 +11,7 @@ namespace Phase05
         public OperationsTest()
         {
             mockIndex = new Mock<InvertedIndex>();
-            mockIndex.SetupGet(x => x.Index).Returns(Creator.CreateIndex());
+            mockIndex.SetupGet(x => x.Index).Returns(SampleCreator.CreateIndex());
         }
 
         [Fact]

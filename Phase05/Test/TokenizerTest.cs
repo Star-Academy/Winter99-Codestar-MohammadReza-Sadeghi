@@ -8,54 +8,48 @@ namespace Phase05
         [Fact]
         public void TokenizeTest()
         {
-            string doc = Creator.CreateStr();
-            Assert.Equal("tus in  some people8. there is a nati", Tokenizer.Tokenize(doc));
+            string doc = SampleCreator.CreateStr();
+            Assert.Equal(SampleCreator.CreateTekenizedStr(), Tokenizer.Tokenize(doc));
         }
 
         [Fact]
         public void SplitDocumentTest()
         {
-            string doc = Creator.CreateStr();
-            Assert.Equal(new[] { "tus", "in", "some", "people8", "There", "is", "a", "nati" }, Tokenizer.SplitDocument(doc));
+            string doc = SampleCreator.CreateStr();
+            Assert.Equal(SampleCreator.CreateSplitdedDocument(), Tokenizer.SplitDocument(doc));
         }
 
         [Fact]
         public void SplitInputTest()
         {
-            string doc = Creator.CreateStr();
-            Assert.Equal(new[] { "tus", "in", "some", "people8.", "There", "is", "a", "nati" }, Tokenizer.SplitInput(doc));
+            string doc = SampleCreator.CreateStr();
+            Assert.Equal(SampleCreator.CreateSplittedInput(), Tokenizer.SplitInput(doc));
         }
 
         [Fact]
         public void ExtractQueryTest1()
         {
-            var query = Creator.CreateQueryString();
+            var query = SampleCreator.CreateQueryString();
             List<string> andWords = new List<string>();
-            List<string> orWords = new List<string>();
-            List<string> exWords = new List<string>();
-            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
+            andWords = Tokenizer.ExtractAndWords(query);
             Assert.Equal(new List<string> { "i" }, andWords);
         }
 
         [Fact]
         public void ExtractQueryTest2()
         {
-            var query = Creator.CreateQueryString();
-            List<string> andWords = new List<string>();
+            var query = SampleCreator.CreateQueryString();
             List<string> orWords = new List<string>();
-            List<string> exWords = new List<string>();
-            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
+            orWords = Tokenizer.ExtractOrWords(query);
             Assert.Equal(new List<string> { "conclusion", "woultake" }, orWords);
         }
 
         [Fact]
         public void ExtractQueryTest3()
         {
-            var query = Creator.CreateQueryString();
-            List<string> andWords = new List<string>();
-            List<string> orWords = new List<string>();
+            var query = SampleCreator.CreateQueryString();
             List<string> exWords = new List<string>();
-            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
+            exWords = Tokenizer.ExtractExcludeWords(query);
             Assert.Equal(new List<string> { "issue" }, exWords);
         }
     }

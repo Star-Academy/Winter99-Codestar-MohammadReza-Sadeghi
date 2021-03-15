@@ -13,10 +13,9 @@ namespace Phase05
         }
         public HashSet<int> SearchQuery(string query)
         {
-            List<string> andWords;
-            List<string> orWords;
-            List<string> exWords;
-            (andWords, orWords, exWords) = Tokenizer.ExtractQuery(query);
+            List<string> andWords = Tokenizer.ExtractAndWords(query);
+            List<string> orWords = Tokenizer.ExtractOrWords(query);
+            List<string> exWords = Tokenizer.ExtractExcludeWords(query);
             var result = Operations.OrWords(orWords, Index);
             if (andWords.Count > 0)
             {

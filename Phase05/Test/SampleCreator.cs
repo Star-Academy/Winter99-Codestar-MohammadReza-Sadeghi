@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Phase05
 {
-    class Creator
+    class SampleCreator
     {
         public static List<string> CreateStringList()
         {
@@ -30,6 +30,21 @@ namespace Phase05
         public static string CreateStr()
         {
             return "tus in  some people8. There is a nati";
+        }
+
+        public static string CreateTekenizedStr()
+        {
+            return "tus in  some people8. there is a nati";
+        }
+
+        public static string[] CreateSplitdedDocument()
+        {
+            return new[] { "tus", "in", "some", "people8", "There", "is", "a", "nati" };
+        }
+
+        public static string[] CreateSplittedInput()
+        {
+            return new[] { "tus", "in", "some", "people8.", "There", "is", "a", "nati" };
         }
 
         public static string CreateQueryString()

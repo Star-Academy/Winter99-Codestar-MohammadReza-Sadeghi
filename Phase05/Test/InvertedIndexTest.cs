@@ -11,9 +11,9 @@ namespace Phase05
         public void CreateIndexTest()
         {
             var invertedIndex = new InvertedIndex();
-            var docs = Creator.CreateStringList();
+            var docs = SampleCreator.CreateStringList();
             invertedIndex.CreateIndex(docs);
-            Assert.Equal(invertedIndex.Index, Creator.CreateIndex());
+            Assert.Equal(invertedIndex.Index, SampleCreator.CreateIndex());
         }
 
         [Fact]

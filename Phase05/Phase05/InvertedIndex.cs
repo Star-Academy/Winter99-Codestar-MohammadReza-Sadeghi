@@ -19,17 +19,16 @@ namespace Phase05
                 var tokenizedDoc = Tokenizer.Tokenize(documents[i]);
                 var docWords = Tokenizer.SplitDocument(tokenizedDoc);
                 foreach (string word in docWords)
-                {
-                    AddToIndex(word, i);
-                }
+                    if (!word.Equals(""))
+                        AddToIndex(word, i);
             }
         }
 
         public void AddToIndex(string key, int document)
         {
-            var docs = new HashSet<int>();
-            if (Index.ContainsKey(key))
-                docs = Index[key];
+            HashSet<int> docs;
+            if (!Index.TryGetValue(key, out docs))
+                docs = new HashSet<int>();
             docs.Add(document);
             Index[key] = docs;
         }

@@ -23,23 +23,37 @@ namespace Phase05
             return Regex.Split(input, "\\s+");
         }
 
-        public static (List<string>, List<string>, List<string>) ExtractQuery(string query)
+        public static List<string> ExtractAndWords(string query)
         {
             query = Tokenizer.Tokenize(query);
             var queryWords = Tokenizer.SplitInput(query);
             var andWords = new List<string>();
-            var orWords = new List<string>();
-            var exWords = new List<string>();
             foreach (string word in queryWords)
-            {
+                if (word[0] != '+' && word[0] != '-')
+                    andWords.Add(word);
+            return andWords;
+        }
+
+        public static List<string> ExtractOrWords(string query)
+        {
+            query = Tokenizer.Tokenize(query);
+            var queryWords = Tokenizer.SplitInput(query);
+            var orWords = new List<string>();
+            foreach (string word in queryWords)
                 if (word[0] == '+')
                     orWords.Add(word.Substring(1));
-                else if (word[0] == '-')
+            return orWords;
+        }
+
+        public static List<string> ExtractExcludeWords(string query)
+        {
+            query = Tokenizer.Tokenize(query);
+            var queryWords = Tokenizer.SplitInput(query);
+            var exWords = new List<string>();
+            foreach (string word in queryWords)
+                if (word[0] == '-')
                     exWords.Add(word.Substring(1));
-                else
-                    andWords.Add(word);
-            }
-            return (andWords, orWords, exWords);
+            return exWords;
         }
 
     }
