@@ -21,7 +21,7 @@ jobs:
       id: version
       uses: pozetroninc/github-action-get-latest-release@master
       with:
-        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi
+        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi/tree/CI-CD
 
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
