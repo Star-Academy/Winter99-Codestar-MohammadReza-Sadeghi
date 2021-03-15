@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Phase05.Utils;
+using System.Collections.Generic;
 
-namespace Phase05
+namespace Phase05.Search
 {
     public class InvertedIndex
     {
@@ -8,7 +9,7 @@ namespace Phase05
 
         public InvertedIndex()
         {
-                                          
+
             Index = new Dictionary<string, HashSet<int>>();
         }
 

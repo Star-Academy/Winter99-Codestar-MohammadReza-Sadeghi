@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Phase05
+namespace Phase05.IO
 {
     public class Input
     {

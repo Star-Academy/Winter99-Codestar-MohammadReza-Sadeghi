@@ -1,8 +1,11 @@
 ﻿using Xunit;
 using Moq;
 using System.Collections.Generic;
+using Phase05;
+using Phase05.Search;
+using Phase05.Utils;
 
-namespace Phase05
+namespace Test.UtilsTest
 {
     public class OperationsTest
     {

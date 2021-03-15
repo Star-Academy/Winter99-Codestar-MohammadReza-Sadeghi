@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Phase05
+namespace Phase05.Utils
 {
     public class Tokenizer
     {
@@ -25,8 +25,8 @@ namespace Phase05
 
         public static List<string> ExtractAndWords(string query)
         {
-            query = Tokenizer.Tokenize(query);
-            var queryWords = Tokenizer.SplitInput(query);
+            query = Tokenize(query);
+            var queryWords = SplitInput(query);
             var andWords = new List<string>();
             foreach (string word in queryWords)
                 if (word[0] != '+' && word[0] != '-')
@@ -36,8 +36,8 @@ namespace Phase05
 
         public static List<string> ExtractOrWords(string query)
         {
-            query = Tokenizer.Tokenize(query);
-            var queryWords = Tokenizer.SplitInput(query);
+            query = Tokenize(query);
+            var queryWords = SplitInput(query);
             var orWords = new List<string>();
             foreach (string word in queryWords)
                 if (word[0] == '+')
@@ -47,8 +47,8 @@ namespace Phase05
 
         public static List<string> ExtractExcludeWords(string query)
         {
-            query = Tokenizer.Tokenize(query);
-            var queryWords = Tokenizer.SplitInput(query);
+            query = Tokenize(query);
+            var queryWords = SplitInput(query);
             var exWords = new List<string>();
             foreach (string word in queryWords)
                 if (word[0] == '-')

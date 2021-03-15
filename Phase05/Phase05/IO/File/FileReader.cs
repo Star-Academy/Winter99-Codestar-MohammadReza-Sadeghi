@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Phase05
+namespace Phase05.IO
 {
     public class FileReader
     {
@@ -18,7 +18,7 @@ namespace Phase05
                         documents.Add(content);
                 }
             }
-            catch 
+            catch
             {
                 Output.PrintString("Invalid path :)");
             }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Phase05;
+using Phase05.Utils;
+using System.Collections.Generic;
 using Xunit;
 
-namespace Phase05
+namespace Test.UtilsTest
 {
     public class TokenizerTest
     {

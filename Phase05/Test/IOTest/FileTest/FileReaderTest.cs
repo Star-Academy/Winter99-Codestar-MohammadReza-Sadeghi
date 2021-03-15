@@ -1,7 +1,8 @@
+﻿using Phase05.IO;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Phase05
+namespace Test.IOTest.FileTest
 {
     public class FileReaderTest
     {

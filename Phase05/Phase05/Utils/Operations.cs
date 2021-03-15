@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Phase05.Search;
 
-namespace Phase05
+namespace Phase05.Utils
 {
     public class Operations
     {

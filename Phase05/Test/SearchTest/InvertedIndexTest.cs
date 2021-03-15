@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Phase05;
+using Phase05.Search;
+using System.Collections.Generic;
 using Xunit;
-using Xunit.Sdk;
 
-namespace Phase05
+namespace Test.SearchTest
 {
     public class InvertedIndexTest
     {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Phase05.Utils;
 using System.Collections.Generic;
 
-namespace Phase05
+namespace Phase05.Search
 {
     public class SearchEngine
     {
@@ -9,7 +9,7 @@ namespace Phase05
 
         public SearchEngine(InvertedIndex index)
         {
-            this.Index = index;
+            Index = index;
         }
         public HashSet<int> SearchQuery(string query)
         {

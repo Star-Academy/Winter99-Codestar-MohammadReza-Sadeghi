@@ -1,8 +1,10 @@
 ﻿using Xunit;
 using Moq;
 using System.Collections.Generic;
+using Phase05.Search;
+using Phase05;
 
-namespace Phase05
+namespace Test.SearchTest
 {
     public class SearchEngineTest
     {
