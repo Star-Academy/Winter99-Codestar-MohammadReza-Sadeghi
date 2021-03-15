@@ -15,13 +15,13 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.0.x
+        dotnet-version: 3.1.301
 
     - name: Get current release version
       id: version
       uses: pozetroninc/github-action-get-latest-release@master
       with:
-        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi/tree/CI-CD
+        repository: Star-Academy/Winter99-Codestar-MohammadReza-Sadeghi
 
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
