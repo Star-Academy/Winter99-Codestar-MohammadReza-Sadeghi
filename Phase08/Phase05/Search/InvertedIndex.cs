@@ -36,7 +36,6 @@ namespace Phase05.Search
 
         public void CreateIndex(List<string> documents)
         {
-            //SetIdentityInsert();
             for (int i = 0; i < documents.Count; i++)
             {
                 var docId = AddDocument(documents[i]);
@@ -46,14 +45,6 @@ namespace Phase05.Search
                     if (!word.Equals(""))
                         AddToIndex(word, docId);
             }
-        }
-
-        public void SetIdentityInsert()
-        {
-            this.Database.ExecuteSqlRaw("SET IDENTITY_INSERT InvertedIndexDB.Documents ON");
-            //this.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Words ON");
-            //this.Database.ExecuteSqlRaw("SET IDENTITY_INSERT WordDocs ON");
-            this.SaveChanges();
         }
 
         public int AddDocument(string content)
@@ -66,36 +57,14 @@ namespace Phase05.Search
 
         public void AddToIndex(string key, int docId)
         {
-            //Console.WriteLine(key + " " + docId);
-            //using (var context = new InvertedIndex())
-            //{
-              /*  Document newDoc;
-                if (*//*context.*//*Documents.Any(d => d.DocId == docId))
-                {
-                    newDoc = *//*context.*//*Documents.Single(d => d.DocId == docId);
-                    Console.WriteLine("doc exist");
-                }
-                else
-                {
-                    newDoc = new Document(docId);
-                    *//*context.*//*Documents.Add(newDoc);
-                    *//*context.*//*Database.ExecuteSqlRaw("SET IDENTITY_INSERT Documents ON");
-                    *//*context.*//*SaveChanges();
-                    Console.WriteLine("doc doesn't exist");
-                }*/
-
                 Word newWord;
-                if (/*context.*/this.Words.Any(w => w.Value.Equals(key)))
-                {
-                    newWord = /*context.*/this.Words.Single(w => w.Value.Equals(key));
-                    //Console.WriteLine("word exist");
-                }
+                if (this.Words.Any(w => w.Value.Equals(key)))
+                    newWord = this.Words.Single(w => w.Value.Equals(key));
                 else
                 {
                     newWord = new Word(key);
-                    /*context.*/this.Words.Add(newWord);
-                    /*context.*/this.SaveChanges();
-                    //Console.WriteLine("word doesn't exist");
+                    this.Words.Add(newWord);
+                    this.SaveChanges();
                 }
 
                 if (!this.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
@@ -104,38 +73,22 @@ namespace Phase05.Search
                     this.WordDocs.Add(wordDoc);
                     this.SaveChanges();
                 }
-            /*context.*/
-            //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT WordDocs OFF");
-            /*context.*/
-            /* if (!newWord.Documents.Any(d => d.DocId == docId))
-             {
-                 newWord.Documents.Add(newDoc);
-                 context.SaveChanges();
-             }*/
-            //}
         }
 
         public HashSet<int> GetDocsByWord(string word)
         {
             ICollection<int> docs;
-            using (var context = new InvertedIndex())
-            {
-                if (context.Words.Any(w => w.Value.Equals(word)))
-                    //docs = context.Words.Single(w => w.Value.Equals(word)).Documents.Select(d => d.DocId).ToHashSet();
-                    docs = context.Documents.Where(doc => doc.WordDocs.Any(j => j.WordId == word)).Select(doc => doc.DocId).ToHashSet();
-                else
-                    docs = new HashSet<int>();
-            }
+            if (this.Words.Any(w => w.Value.Equals(word)))
+                docs = this.Documents.Where(doc => doc.WordDocs.Any(j => j.WordId == word)).Select(doc => doc.DocId).ToHashSet();
+            else
+                docs = new HashSet<int>();
             return (HashSet<int>) docs;
         }
 
         public bool ContainsWord(string word)
         {
             bool result = false;
-            using (var context = new InvertedIndex())
-            {
-                result = context.Words.Any(w => w.Value.Equals(word));
-            }
+            result = this.Words.Any(w => w.Value.Equals(word));
             return result;
         }
 
