@@ -13,10 +13,9 @@ namespace Phase05.Search
         public DbSet<Word> Words { get; set; }
         public DbSet<WordDoc> WordDocs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=.\MRSADEGHI78;Database=InvertedIndexDB;Trusted_Connection=True;");
-        }
+        public InvertedIndex(DbContextOptions<InvertedIndex> options): base(options) { }
+        
+        public InvertedIndex() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,24 +53,27 @@ namespace Phase05.Search
             return newDoc.DocId;
         }
 
+        public void AddWord(string word)
+        {
+            Word newWord;
+            if (this.Words.Any(w => w.Value.Equals(word)))
+                newWord = this.Words.Single(w => w.Value.Equals(word));
+            else
+            {
+                newWord = new Word(word);
+                this.Words.Add(newWord);
+                this.SaveChanges();
+            }
+        }
+
         public void AddToIndex(string key, int docId)
         {
-                Word newWord;
-                if (this.Words.Any(w => w.Value.Equals(key)))
-                    newWord = this.Words.Single(w => w.Value.Equals(key));
-                else
-                {
-                    newWord = new Word(key);
-                    this.Words.Add(newWord);
-                    this.SaveChanges();
-                }
-
-                if (!this.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
-                {
-                    WordDoc wordDoc = new WordDoc { DocId = docId, WordId = key };
-                    this.WordDocs.Add(wordDoc);
-                    this.SaveChanges();
-                }
+            if (!this.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
+            {
+                WordDoc wordDoc = new WordDoc { DocId = docId, WordId = key };
+                this.WordDocs.Add(wordDoc);
+                this.SaveChanges();
+            }
         }
 
         public virtual HashSet<int> GetDocsByWord(string word)

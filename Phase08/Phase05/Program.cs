@@ -1,4 +1,5 @@
-﻿using Phase05.IO;
+﻿using Microsoft.EntityFrameworkCore;
+using Phase05.IO;
 using Phase05.Search;
 
 namespace Phase05
@@ -10,7 +11,11 @@ namespace Phase05
         static void Main(string[] args)
         {
             var documents = FileReader.ReadFromFolder(folderPath);
-            var invertedIndex = new InvertedIndex();
+            var options = new DbContextOptionsBuilder<InvertedIndex>()
+                .UseSqlServer(@"Server=.\MRSADEGHI78;Database=InvertedIndexDB;Trusted_Connection=True;")
+                .Options;
+            var invertedIndex = new InvertedIndex(options);
+            invertedIndex.Database.EnsureCreated();
             invertedIndex.CreateIndex(documents);
             var inputStr = Input.ReadFromConsole();
             var searchEngine = new SearchEngine(invertedIndex);

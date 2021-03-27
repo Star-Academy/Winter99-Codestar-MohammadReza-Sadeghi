@@ -4,19 +4,17 @@ using System.Collections.Generic;
 using Phase05.Search;
 using Phase05.Utils;
 using Test.Mock;
+using Microsoft.EntityFrameworkCore;
 
 namespace Test.UtilsTest
 {
     public class OperationsTest
     {
         Mock<InvertedIndex> MockIndex;
-
         public OperationsTest()
         {
             MockIndex = new Mock<InvertedIndex>();
             InvertedIndexMock.MockIndex(MockIndex);
-            /*MockIndex.Setup(x => x.GetDocsByWord(It.IsAny<string>())).Returns((string word) => InvertedIndexMock.GetDocsByWordMock(word));
-            MockIndex.Setup(x => x.ContainsWord(It.IsAny<string>())).Returns((string word) => InvertedIndexMock.ContainsWordMock(word));*/
         }
 
         [Fact]
