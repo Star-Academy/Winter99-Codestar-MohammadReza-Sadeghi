@@ -1,7 +1,6 @@
 ﻿using Moq;
 using Phase05.Search;
 using System.Collections.Generic;
-using TypeMock.ArrangeActAssert;
 
 namespace Test.Mock
 {
@@ -11,15 +10,6 @@ namespace Test.Mock
 
         public static void MockIndex(Mock<InvertedIndex> mockIndex)
         {
-            /*mockIndex = Isolate.Fake.Instance<InvertedIndex>();
-            Isolate.WhenCalled(() => mockIndex.GetDocsByWord(null)).DoInstead(contaxt =>
-            {
-                return GetDocsByWordMock(contaxt.Parameters[0] as string);
-            });
-            Isolate.WhenCalled(() => mockIndex.ContainsWord(null)).DoInstead(contaxt =>
-            {
-                return ContainsWordMock(contaxt.Parameters[0] as string);
-            });*/
             mockIndex.Setup(x => x.GetDocsByWord(It.IsAny<string>())).Returns((string word) => GetDocsByWordMock(word));
             mockIndex.Setup(x => x.ContainsWord(It.IsAny<string>())).Returns((string word) => ContainsWordMock(word));
         }
