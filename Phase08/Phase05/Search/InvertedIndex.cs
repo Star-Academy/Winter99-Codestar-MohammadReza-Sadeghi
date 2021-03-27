@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Phase05.Utils;
 using System.Collections.Generic;
 using Phase05.DataSet;
@@ -8,7 +8,6 @@ namespace Phase05.Search
 {
     public class InvertedIndex : DbContext
     {
-        //public virtual Dictionary<string, HashSet<int>> Index { get; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<WordDoc> WordDocs { get; set; }
