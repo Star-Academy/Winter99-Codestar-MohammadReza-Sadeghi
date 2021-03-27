@@ -3,6 +3,7 @@ using Moq;
 using System.Collections.Generic;
 using Phase05.Search;
 using Phase05;
+using Test.Mock;
 
 namespace Test.SearchTest
 {
@@ -11,9 +12,9 @@ namespace Test.SearchTest
         [Fact]
         public void SearchQueryTest()
         {
+            Mock<InvertedIndex> mockIndex = new Mock<InvertedIndex>();
+            InvertedIndexMock.MockIndex(mockIndex);
             var query = SampleCreator.CreateQueryString();
-            var mockIndex = new Mock<InvertedIndex>();
-            mockIndex.SetupGet(x => x.Index).Returns(SampleCreator.CreateIndex());
             Assert.Equal(new HashSet<int> { 1 }, new SearchEngine(mockIndex.Object).SearchQuery(query));
         }
     }

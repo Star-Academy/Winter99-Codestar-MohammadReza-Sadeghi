@@ -13,7 +13,6 @@ namespace Phase05.DataSet
         public Document(string content)
         {
             this.Content = content;
-            //this.WordDocs = new HashSet<WordDoc>();
         }
     }
 }

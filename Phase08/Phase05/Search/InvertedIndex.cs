@@ -3,13 +3,12 @@ using Phase05.Utils;
 using System.Collections.Generic;
 using Phase05.DataSet;
 using System.Linq;
-using System;
 
 namespace Phase05.Search
 {
     public class InvertedIndex : DbContext
     {
-        public virtual Dictionary<string, HashSet<int>> Index { get; }
+        //public virtual Dictionary<string, HashSet<int>> Index { get; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<WordDoc> WordDocs { get; set; }
@@ -75,7 +74,7 @@ namespace Phase05.Search
                 }
         }
 
-        public HashSet<int> GetDocsByWord(string word)
+        public virtual HashSet<int> GetDocsByWord(string word)
         {
             ICollection<int> docs;
             if (this.Words.Any(w => w.Value.Equals(word)))
@@ -85,7 +84,7 @@ namespace Phase05.Search
             return (HashSet<int>) docs;
         }
 
-        public bool ContainsWord(string word)
+        public virtual bool ContainsWord(string word)
         {
             bool result = false;
             result = this.Words.Any(w => w.Value.Equals(word));
