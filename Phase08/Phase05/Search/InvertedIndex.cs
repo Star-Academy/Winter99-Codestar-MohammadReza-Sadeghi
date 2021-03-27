@@ -55,12 +55,9 @@ namespace Phase05.Search
 
         public void AddWord(string word)
         {
-            Word newWord;
-            if (this.Words.Any(w => w.Value.Equals(word)))
-                newWord = this.Words.Single(w => w.Value.Equals(word));
-            else
+            if (!this.Words.Any(w => w.Value.Equals(word)))
             {
-                newWord = new Word(word);
+                var newWord = new Word(word);
                 this.Words.Add(newWord);
                 this.SaveChanges();
             }
@@ -68,6 +65,7 @@ namespace Phase05.Search
 
         public void AddToIndex(string key, int docId)
         {
+            AddWord(key);
             if (!this.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
             {
                 WordDoc wordDoc = new WordDoc { DocId = docId, WordId = key };
