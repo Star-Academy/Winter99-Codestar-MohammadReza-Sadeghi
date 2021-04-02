@@ -75,19 +75,17 @@ namespace Phase05.Search
 
         public virtual HashSet<int> GetDocsByWord(string word)
         {
-            ICollection<int> docs;
+            HashSet<int> docs;
             if (this.Words.Any(w => w.Value.Equals(word)))
                 docs = this.Documents.Where(doc => doc.WordDocs.Any(j => j.WordId == word)).Select(doc => doc.DocId).ToHashSet();
             else
                 docs = new HashSet<int>();
-            return (HashSet<int>) docs;
+            return docs;
         }
 
         public virtual bool ContainsWord(string word)
         {
-            bool result = false;
-            result = this.Words.Any(w => w.Value.Equals(word));
-            return result;
+            return this.Words.Any(w => w.Value.Equals(word));
         }
 
     }

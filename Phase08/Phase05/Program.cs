@@ -7,12 +7,13 @@ namespace Phase05
     public class Program
     {
         private static readonly string folderPath = @"..\..\..\..\EnglishData\";
+        private static readonly string sqlServer = @"Server=.\MRSADEGHI78;Database=InvertedIndexDB;Trusted_Connection=True;";
 
         static void Main(string[] args)
         {
             var documents = FileReader.ReadFromFolder(folderPath);
             var options = new DbContextOptionsBuilder<InvertedIndex>()
-                .UseSqlServer(@"Server=.\MRSADEGHI78;Database=InvertedIndexDB;Trusted_Connection=True;")
+                .UseSqlServer(sqlServer)
                 .Options;
             var invertedIndex = new InvertedIndex(options);
             invertedIndex.Database.EnsureCreated();

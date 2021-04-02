@@ -14,7 +14,7 @@ namespace Phase05.IO
                 foreach (string file in Directory.EnumerateFiles(pathFolder, "*"))
                 {
                     string content = File.ReadAllText(file);
-                    if (!content.Equals(""))
+                    if (!string.IsNullOrEmpty(content))
                         documents.Add(content);
                 }
             }
