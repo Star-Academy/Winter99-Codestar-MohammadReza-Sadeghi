@@ -7,6 +7,7 @@ namespace Phase05.Utils
     public class Tokenizer
     {
         private static readonly string DocumentRegex = "\\w+";
+        private static readonly string QueryRegex = "\\s+";
 
         public static string Tokenize(string str)
         {
@@ -20,7 +21,7 @@ namespace Phase05.Utils
 
         public static string[] SplitInput(string input)
         {
-            return Regex.Split(input, "\\s+");
+            return Regex.Split(input, QueryRegex);
         }
 
         public static List<string> ExtractAndWords(string query)
