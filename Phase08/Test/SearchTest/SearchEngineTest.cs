@@ -2,7 +2,6 @@
 using Moq;
 using System.Collections.Generic;
 using Phase05.Search;
-using Phase05;
 using Test.Mock;
 
 namespace Test.SearchTest

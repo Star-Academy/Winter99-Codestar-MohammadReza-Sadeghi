@@ -28,6 +28,9 @@ namespace Test.UtilsTest
             Assert.Equal(SampleCreator.CreateSplittedInput(), Tokenizer.SplitInput(doc));
         }
 
+        /// <summary>
+        /// Tests 'and' words of the query
+        /// </summary>
         [Fact]
         public void ExtractQueryTest1()
         {
@@ -37,6 +40,9 @@ namespace Test.UtilsTest
             Assert.Equal(new List<string> { "i" }, andWords);
         }
 
+        /// <summary>
+        /// Tests 'or' words of the query
+        /// </summary>
         [Fact]
         public void ExtractQueryTest2()
         {
@@ -46,6 +52,9 @@ namespace Test.UtilsTest
             Assert.Equal(new List<string> { "conclusion", "woultake" }, orWords);
         }
 
+        /// <summary>
+        /// Tests 'exclude' words of the query
+        /// </summary>
         [Fact]
         public void ExtractQueryTest3()
         {

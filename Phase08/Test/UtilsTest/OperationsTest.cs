@@ -31,6 +31,10 @@ namespace Test.UtilsTest
             Assert.Equal(new HashSet<int> { 0 }, Operations.AndWords(words, MockIndex.Object));
         }
 
+        /// <summary>
+        /// Tests the case in which one of the 'and' operands ("from") doesn't exist in the data base,
+        /// so the result should be an empty hashset
+        /// </summary>
         [Fact]
         public void AndWordsTest2()
         {
@@ -38,6 +42,10 @@ namespace Test.UtilsTest
             Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, MockIndex.Object));
         }
 
+        /// <summary>
+        /// Tests the case in which there is no document containing all 'and' operands,
+        /// so the result should be an empty hashset
+        /// </summary>
         [Fact]
         public void AndWordsTest3()
         {

@@ -37,6 +37,9 @@ namespace Test.SearchTest
             Assert.Equal(index, GetDataBaseAsDictionary());
         }
 
+        /// <summary>
+        /// Checks adding the same content to the index twice
+        /// </summary>
         [Fact]
         public void AddToIndexTest2()
         {
@@ -66,6 +69,9 @@ namespace Test.SearchTest
             Assert.Equal(word, invertedIndex.Words.Select(w => w.Value).First());
         }
 
+        /// <summary>
+        /// Checks adding the same word to the database twice
+        /// </summary>
         [Fact]
         public void AddWordTest2()
         {
@@ -85,6 +91,9 @@ namespace Test.SearchTest
             Assert.Equal(new HashSet<int> { 2, 3 }, result);
         }
 
+        /// <summary>
+        /// Tests getting documents of a word that doesn't exist in the database
+        /// </summary>
         [Fact]
         public void GetDocsByWordTest2()
         {
@@ -102,6 +111,9 @@ namespace Test.SearchTest
             Assert.True(invertedIndex.ContainsWord(word));
         }
 
+        /// <summary>
+        /// Tests a word that doesn't exist in the database
+        /// </summary>
         [Fact]
         public void ContainsWordTest2()
         {
