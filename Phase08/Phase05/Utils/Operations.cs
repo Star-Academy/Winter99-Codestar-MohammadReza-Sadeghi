@@ -15,6 +15,8 @@ namespace Phase05.Utils
 
         public HashSet<int> OrWords(List<string> words)
         {
+            if (words.Count == 0)
+                return null;
             var orDocs = new HashSet<int>();
             foreach (string word in words)
             {
@@ -29,14 +31,27 @@ namespace Phase05.Utils
 
         public HashSet<int> AndWords(List<string> words, HashSet<int> baseSet)
         {
-            if (baseSet.Count == 0)
+            if (baseSet != null && baseSet.Count == 0)
                 return new HashSet<int>();
-            var andDocs = AndWords(words);
-            andDocs.IntersectWith(baseSet);
+            var andDocs = new HashSet<int>();
+            for (int i = 0; i < words.Count; i++)
+            {
+                if (!Index.ContainsWord(words[i]))
+                    return new HashSet<int>();
+                if (i == 0)
+                    andDocs = new HashSet<int>(Index.GetDocsByWord(words[i]));
+                else
+                {
+                    var wordDocs = Index.GetDocsByWord(words[i]);
+                    andDocs.IntersectWith(wordDocs);
+                }
+            }
+            if (baseSet != null)
+                andDocs.IntersectWith(baseSet);
             return andDocs;
         }
 
-        public HashSet<int> AndWords(List<string> words)
+       /* public HashSet<int> AndWords(List<string> words)
         {
             var andDocs = new HashSet<int>();
             for (int i = 0; i < words.Count; i++)
@@ -52,7 +67,7 @@ namespace Phase05.Utils
                 }
             }
             return andDocs;
-        }
+        }*/
 
         public HashSet<int> ExcludeWords(HashSet<int> baseSet, List<string> words)
         {
