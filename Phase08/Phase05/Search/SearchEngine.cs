@@ -16,15 +16,16 @@ namespace Phase05.Search
             List<string> andWords = Tokenizer.ExtractAndWords(query);
             List<string> orWords = Tokenizer.ExtractOrWords(query);
             List<string> exWords = Tokenizer.ExtractExcludeWords(query);
-            var result = Operations.OrWords(orWords, Index);
+            Operations operations = new Operations(Index);
+            var result = operations.OrWords(orWords);
             if (andWords.Count > 0)
             {
                 if (orWords.Count == 0)
-                    result = Operations.AndWords(andWords, Index);
+                    result = operations.AndWords(andWords);
                 else
-                    result = Operations.AndWords(andWords, result, Index);
+                    result = operations.AndWords(andWords, result);
             }
-            Operations.ExcludeWords(result, exWords, Index);
+            operations.ExcludeWords(result, exWords);
             return result;
         }
     }

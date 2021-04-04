@@ -10,25 +10,27 @@ namespace Test.UtilsTest
 {
     public class OperationsTest
     {
-        Mock<InvertedIndex> MockIndex;
+        private Operations operations;
+
         public OperationsTest()
         {
-            MockIndex = new Mock<InvertedIndex>();
+            Mock<InvertedIndex> MockIndex = new Mock<InvertedIndex>();
             InvertedIndexMock.MockIndex(MockIndex);
+            operations = new Operations(MockIndex.Object);
         }
 
         [Fact]
         public void OrWordsTest()
         {
             var words = new List<string> { "i", "woultake", "anyone" };
-            Assert.Equal(new HashSet<int> { 0, 1 }, Operations.OrWords(words, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { 0, 1 }, operations.OrWords(words));
         }
 
         [Fact]
         public void AndWordsTest()
         {
             var words = new List<string> { "overstating", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { 0 }, Operations.AndWords(words, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { 0 }, operations.AndWords(words));
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace Test.UtilsTest
         public void AndWordsTest2()
         {
             var words = new List<string> { "from", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, operations.AndWords(words));
         }
 
         /// <summary>
@@ -50,14 +52,14 @@ namespace Test.UtilsTest
         public void AndWordsTest3()
         {
             var words = new List<string> { "overstating", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, new HashSet<int> { 1 }, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, operations.AndWords(words, new HashSet<int> { 1 }));
         }
 
         [Fact]
         public void AndWordsTest4()
         {
             var words = new List<string> { "from", "woultake", "issue" };
-            Assert.Equal(new HashSet<int> { }, Operations.AndWords(words, new HashSet<int> { }, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { }, operations.AndWords(words, new HashSet<int> { }));
         }
 
         [Fact]
@@ -65,7 +67,7 @@ namespace Test.UtilsTest
         {
             var words = new List<string> { "overstating", "conclusion" };
             var baseSet = new HashSet<int> { 8, 0, 5, 6 };
-            Assert.Equal(new HashSet<int> { 8, 5, 6 }, Operations.ExcludeWords(baseSet, words, MockIndex.Object));
+            Assert.Equal(new HashSet<int> { 8, 5, 6 }, operations.ExcludeWords(baseSet, words));
         }
     }
 }

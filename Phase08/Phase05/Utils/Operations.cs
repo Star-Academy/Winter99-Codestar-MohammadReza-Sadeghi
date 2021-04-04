@@ -6,53 +6,60 @@ namespace Phase05.Utils
 {
     public class Operations
     {
-        public static HashSet<int> OrWords(List<string> words, InvertedIndex index)
+        private InvertedIndex Index;
+
+        public Operations(InvertedIndex index)
+        {
+            this.Index = index;
+        }
+
+        public HashSet<int> OrWords(List<string> words)
         {
             var orDocs = new HashSet<int>();
             foreach (string word in words)
             {
-                if (index.ContainsWord(word))
+                if (Index.ContainsWord(word))
                 {
-                    var wordDocs = index.GetDocsByWord(word);
+                    var wordDocs = Index.GetDocsByWord(word);
                     orDocs.UnionWith(wordDocs);
                 }
             }
             return orDocs;
         }
 
-        public static HashSet<int> AndWords(List<string> words, HashSet<int> baseSet, InvertedIndex index)
+        public HashSet<int> AndWords(List<string> words, HashSet<int> baseSet)
         {
             if (baseSet.Count == 0)
                 return new HashSet<int>();
-            var andDocs = AndWords(words, index);
+            var andDocs = AndWords(words);
             andDocs.IntersectWith(baseSet);
             return andDocs;
         }
 
-        public static HashSet<int> AndWords(List<string> words, InvertedIndex index)
+        public HashSet<int> AndWords(List<string> words)
         {
             var andDocs = new HashSet<int>();
             for (int i = 0; i < words.Count; i++)
             {
-                if (!index.ContainsWord(words[i]))
+                if (!Index.ContainsWord(words[i]))
                     return new HashSet<int>();
                 if (i == 0)
-                    andDocs = new HashSet<int>(index.GetDocsByWord(words[i]));
+                    andDocs = new HashSet<int>(Index.GetDocsByWord(words[i]));
                 else
                 {
-                    var wordDocs = index.GetDocsByWord(words[i]);
+                    var wordDocs = Index.GetDocsByWord(words[i]);
                     andDocs.IntersectWith(wordDocs);
                 }
             }
             return andDocs;
         }
 
-        public static HashSet<int> ExcludeWords(HashSet<int> baseSet, List<string> words, InvertedIndex index)
+        public HashSet<int> ExcludeWords(HashSet<int> baseSet, List<string> words)
         {
             foreach (string word in words)
             {
-                if (index.ContainsWord(word))
-                    baseSet.ExceptWith(index.GetDocsByWord(word));
+                if (Index.ContainsWord(word))
+                    baseSet.ExceptWith(Index.GetDocsByWord(word));
             }
             return baseSet;
         }
