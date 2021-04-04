@@ -19,13 +19,6 @@ namespace Phase05.Search
             Operations operations = new Operations(Index);
             HashSet<int> result = operations.OrWords(orWords);
             result = operations.AndWords(andWords, result);
-            /*if (andWords.Count > 0)
-            {
-                if (orWords.Count == 0)
-                    result = operations.AndWords(andWords);
-                else
-                    result = operations.AndWords(andWords, result);
-            }*/
             operations.ExcludeWords(result, exWords);
             return result;
         }
