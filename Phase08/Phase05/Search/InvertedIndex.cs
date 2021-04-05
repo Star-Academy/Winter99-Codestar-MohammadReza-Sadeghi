@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Phase05.Utils;
 using System.Collections.Generic;
 using Phase05.DataSet;
@@ -6,30 +5,16 @@ using System.Linq;
 
 namespace Phase05.Search
 {
-    public class InvertedIndex : DbContext
+    public class InvertedIndex
     {
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<Word> Words { get; set; }
-        public DbSet<WordDoc> WordDocs { get; set; }
+        private InvertedIndexContext Context;
 
-        public InvertedIndex(DbContextOptions<InvertedIndex> options): base(options) { }
-        
-        public InvertedIndex() { }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public InvertedIndex(InvertedIndexContext context)
         {
-            modelBuilder.Entity<WordDoc>().HasKey(wd => new { wd.WordId, wd.DocId });
-
-            modelBuilder.Entity<WordDoc>()
-                .HasOne<Word>(wd => wd.Word)
-                .WithMany(w => w.WordDocs)
-                .HasForeignKey(wd => wd.WordId);
-
-            modelBuilder.Entity<WordDoc>()
-                .HasOne<Document>(wd => wd.Doc)
-                .WithMany(d => d.WordDocs)
-                .HasForeignKey(wd => wd.DocId);
+            this.Context = context;
         }
+
+        public InvertedIndex() { }
 
         public void CreateIndex(List<string> documents)
         {
@@ -47,37 +32,37 @@ namespace Phase05.Search
         public int AddDocument(string content)
         {
             var newDoc = new Document(content);
-            this.Documents.Add(newDoc);
-            this.SaveChanges();
+            Context.Documents.Add(newDoc);
+            Context.SaveChanges();
             return newDoc.DocId;
         }
 
         public void AddWord(string word)
         {
-            if (!this.Words.Any(w => w.Value.Equals(word)))
+            if (!Context.Words.Any(w => w.Value.Equals(word)))
             {
                 var newWord = new Word(word);
-                this.Words.Add(newWord);
-                this.SaveChanges();
+                Context.Words.Add(newWord);
+                Context.SaveChanges();
             }
         }
 
         public void AddToIndex(string key, int docId)
         {
             AddWord(key);
-            if (!this.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
+            if (!Context.WordDocs.Any(wd => wd.WordId.Equals(key) && wd.DocId == docId))
             {
                 WordDoc wordDoc = new WordDoc { DocId = docId, WordId = key };
-                this.WordDocs.Add(wordDoc);
-                this.SaveChanges();
+                Context.WordDocs.Add(wordDoc);
+                Context.SaveChanges();
             }
         }
 
         public virtual HashSet<int> GetDocsByWord(string word)
         {
             HashSet<int> docs;
-            if (this.Words.Any(w => w.Value.Equals(word)))
-                docs = this.Documents.Where(doc => doc.WordDocs.Any(j => j.WordId == word)).Select(doc => doc.DocId).ToHashSet();
+            if (Context.Words.Any(w => w.Value.Equals(word)))
+                docs = Context.Documents.Where(doc => doc.WordDocs.Any(j => j.WordId == word)).Select(doc => doc.DocId).ToHashSet();
             else
                 docs = new HashSet<int>();
             return docs;
@@ -85,7 +70,7 @@ namespace Phase05.Search
 
         public virtual bool ContainsWord(string word)
         {
-            return this.Words.Any(w => w.Value.Equals(word));
+            return Context.Words.Any(w => w.Value.Equals(word));
         }
 
     }
