@@ -7,9 +7,9 @@ namespace Phase05.Search
 {
     public class InvertedIndex
     {
-        private InvertedIndexContext Context;
+        private InvertedIndexDbContext Context;
 
-        public InvertedIndex(InvertedIndexContext context)
+        public InvertedIndex(InvertedIndexDbContext context)
         {
             this.Context = context;
         }

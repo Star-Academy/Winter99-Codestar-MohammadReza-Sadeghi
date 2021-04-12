@@ -10,13 +10,13 @@ namespace Test.SearchTest
     public class InvertedIndexTest
     {
         InvertedIndex invertedIndex;
-        InvertedIndexContext invertedIndexContext;
+        InvertedIndexDbContext invertedIndexContext;
         public InvertedIndexTest()
         {
-            var options = new DbContextOptionsBuilder<InvertedIndexContext>()
+            var options = new DbContextOptionsBuilder<InvertedIndexDbContext>()
                 .UseInMemoryDatabase("Test")
                 .Options;
-            invertedIndexContext = new InvertedIndexContext(options);
+            invertedIndexContext = new InvertedIndexDbContext(options);
             invertedIndexContext.Database.EnsureDeleted();
             invertedIndexContext.Database.EnsureCreated();
             invertedIndex = new InvertedIndex(invertedIndexContext);

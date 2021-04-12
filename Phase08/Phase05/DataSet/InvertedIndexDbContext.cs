@@ -2,13 +2,13 @@
 
 namespace Phase05.DataSet
 {
-    public class InvertedIndexContext : DbContext
+    public class InvertedIndexDbContext : DbContext
     {
         public DbSet<Document> Documents { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<WordDoc> WordDocs { get; set; }
 
-        public InvertedIndexContext(DbContextOptions<InvertedIndexContext> options) : base(options) { }
+        public InvertedIndexDbContext(DbContextOptions<InvertedIndexDbContext> options) : base(options) { }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

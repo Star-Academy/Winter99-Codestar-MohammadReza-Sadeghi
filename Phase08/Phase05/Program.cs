@@ -23,10 +23,10 @@ namespace Phase05
 
         private static InvertedIndex InitializeInvertedIndex()
         {
-            var options = new DbContextOptionsBuilder<InvertedIndexContext>()
+            var options = new DbContextOptionsBuilder<InvertedIndexDbContext>()
                 .UseSqlServer(sqlServer)
                 .Options;
-            var invertedIndexContext = new InvertedIndexContext(options);
+            var invertedIndexContext = new InvertedIndexDbContext(options);
             invertedIndexContext.Database.EnsureCreated();
             return new InvertedIndex(invertedIndexContext);
         }
