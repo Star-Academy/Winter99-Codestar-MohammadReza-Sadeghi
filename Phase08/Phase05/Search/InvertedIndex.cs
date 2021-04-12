@@ -27,13 +27,13 @@ namespace Phase05.Search
                     if (!word.Equals(""))
                         AddToIndex(word, docId);
             }
+            Context.SaveChanges();
         }
 
         public int AddDocument(string content)
         {
             var newDoc = new Document(content);
             Context.Documents.Add(newDoc);
-            Context.SaveChanges();
             return newDoc.DocId;
         }
 
@@ -43,7 +43,6 @@ namespace Phase05.Search
             {
                 var newWord = new Word(word);
                 Context.Words.Add(newWord);
-                Context.SaveChanges();
             }
         }
 
@@ -54,7 +53,6 @@ namespace Phase05.Search
             {
                 WordDoc wordDoc = new WordDoc { DocId = docId, WordId = key };
                 Context.WordDocs.Add(wordDoc);
-                Context.SaveChanges();
             }
         }
 
