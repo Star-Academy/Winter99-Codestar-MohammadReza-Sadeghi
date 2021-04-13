@@ -14,11 +14,6 @@ namespace Phase05.Utils
             return str.ToLower();
         }
 
-        public static string[] SplitDocument(string document)
-        {
-            return Regex.Matches(document, DocumentRegex).OfType<Match>().Select(m => m.Value).ToArray();
-        }
-
         public static string[] SplitInput(string input)
         {
             return Regex.Split(input, QueryRegex);

@@ -52,14 +52,5 @@ namespace Phase05.Search
                 }
             };
         }
-
-        /*public List<QueryContainer> CreateAndQueries(List<string> andWords)
-        {
-            var andQueries = new List<QueryContainer>();
-            foreach (var word in andWords)
-                andQueries.Add(
-                    new MatchQuery
-                );
-        }*/
     }
 }
