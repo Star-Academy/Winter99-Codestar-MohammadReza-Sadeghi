@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -17,10 +18,7 @@ namespace Phase05.Models
 
         public static List<Document> GetDocumentList(List<string> strDocs)
         {
-            var resultDocs = new List<Document>();
-            foreach (var doc in strDocs)
-                resultDocs.Add(new Document(doc));
-            return resultDocs;
+            return strDocs.Select(s => new Document(s)).ToList();
         }
     }
 }

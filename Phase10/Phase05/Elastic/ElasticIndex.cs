@@ -2,6 +2,7 @@
 using Phase05.Models;
 using System;
 using System.Collections.Generic;
+using Phase05.Elastic;
 using System.Linq;
 
 namespace Phase05.Elastic
@@ -9,17 +10,18 @@ namespace Phase05.Elastic
     public class ElasticIndex
     {
         private readonly IElasticClient client;
-        private readonly string indexName = "inverted_index_test";
+        private readonly string indexName;
 
-        public ElasticIndex()
+        public ElasticIndex(string serverUrl, int port, string indexName)
         {
-            var uri = new Uri("http://localhost:9200");
+            var uri = new Uri(serverUrl + ":" + port);
             var connectionSettings = new ConnectionSettings(uri);
             connectionSettings.EnableDebugMode();
             client = new ElasticClient(connectionSettings);
+            this.indexName = indexName;
         }
 
-        public void CreateIndex(string indexName)
+        public void CreateIndex()
         {
             var response = client.Indices.Create(indexName, s => s
                 .Settings(CreateSettings)
@@ -79,7 +81,7 @@ namespace Phase05.Elastic
             var response = client.Search<Document>(s => s
                 .Index(indexName)
                 .Query(q => query));
-            ResponseValidator.Validate(response);
+            response.Validate();
             return response;
         }
 

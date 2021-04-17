@@ -4,9 +4,9 @@ namespace Phase05.IO
 {
     public class Input
     {
-        public static string ReadFromConsole()
+        public static string ReadFromConsole(string inputStr)
         {
-            Console.WriteLine("Please enter your query:");
+            Console.WriteLine(inputStr);
             return Console.ReadLine();
         }
     }

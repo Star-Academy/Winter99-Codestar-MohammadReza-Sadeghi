@@ -14,9 +14,9 @@ namespace Phase05.Search
         }
         public List<string> SearchQuery(string query)
         {
-            List<string> andWords = Tokenizer.ExtractAndWords(query);
-            List<string> orWords = Tokenizer.ExtractOrWords(query);
-            List<string> exWords = Tokenizer.ExtractExcludeWords(query);
+            var andWords = Tokenizer.ExtractAndWords(query);
+            var orWords = Tokenizer.ExtractOrWords(query);
+            var exWords = Tokenizer.ExtractExcludeWords(query);
             var elasticQuery = CreateElasticQuery(andWords, orWords, exWords);
             var result = Index.SearchQuery(elasticQuery);
             return result;

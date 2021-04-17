@@ -4,9 +4,9 @@ using Phase05.IO;
 
 namespace Phase05.Elastic
 {
-    public class ResponseValidator
+    public static class ResponseValidator
     {
-        public static void Validate(IResponse response)
+        public static void Validate(this IResponse response)
         {
             if (response.IsValid)
                 return;
