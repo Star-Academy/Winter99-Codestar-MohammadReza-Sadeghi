@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Phase05.IO
 {
@@ -12,7 +13,7 @@ namespace Phase05.IO
             {
                 foreach (string file in Directory.EnumerateFiles(folderPath, "*"))
                 {
-                    string content = File.ReadAllText(file);
+                    string content = ReadFile(file);
                     if (!string.IsNullOrEmpty(content))
                         documents.Add(content);
                 }
@@ -22,6 +23,11 @@ namespace Phase05.IO
                 Output.PrintString("Invalid path :)");
             }
             return documents;
+        }
+
+        public static string ReadFile(string file)
+        {
+            return File.ReadAllText(file);
         }
     }
 }

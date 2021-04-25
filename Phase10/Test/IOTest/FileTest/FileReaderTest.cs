@@ -56,5 +56,12 @@ namespace Test.IOTest.FileTest
             string path = "../../../not_existed_path/";
             Assert.Equal(new List<string> { }, FileReader.ReadFromFolder(path));
         }
+
+        [Fact]
+        public void ReadFileTest()
+        {
+            string path = @"../../../../Test/SampleData/a.txt";
+            Assert.Equal("is what got me", FileReader.ReadFile(path));
+        }
     }
 }
