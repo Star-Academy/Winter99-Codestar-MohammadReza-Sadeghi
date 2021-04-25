@@ -24,8 +24,8 @@ namespace Phase05
 
         private static InvertedIndex InitializeInvertedIndex()
         {
-            ElasticIndex elasticIndex = new ElasticIndex(elasticServerUrl, elasticServerPort, indexName);
-            InvertedIndex invertedIndex = new InvertedIndex(elasticIndex, indexName);
+            var elasticIndex = new ElasticIndex(elasticServerUrl, elasticServerPort, indexName);
+            var invertedIndex = new InvertedIndex(elasticIndex);
             return invertedIndex;
         }
     }

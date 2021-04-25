@@ -8,12 +8,12 @@ namespace Phase05.Search
 {
     public class InvertedIndex
     {
-        private ElasticIndex index;
+        private IElasticIndex index;
 
-        public InvertedIndex(ElasticIndex index, string indexName)
+        public InvertedIndex(ElasticIndex index)
         {
             this.index = index;
-            this.index.CreateIndex(indexName);
+            this.index.CreateIndex();
         }
 
         public InvertedIndex() { }

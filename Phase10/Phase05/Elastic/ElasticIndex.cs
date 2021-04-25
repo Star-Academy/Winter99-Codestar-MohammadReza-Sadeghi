@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Phase05.Elastic
 {
-    public class ElasticIndex
+    public class ElasticIndex : IElasticIndex
     {
         private readonly IElasticClient client;
         private readonly string indexName;
