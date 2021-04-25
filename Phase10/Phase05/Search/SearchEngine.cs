@@ -12,6 +12,7 @@ namespace Phase05.Search
         {
             Index = index;
         }
+
         public List<string> SearchQuery(string query)
         {
             var andWords = Tokenizer.ExtractAndWords(query);
@@ -26,29 +27,44 @@ namespace Phase05.Search
         {
             return new BoolQuery
             {
-                Must = new List<QueryContainer>
+                Must = CreateAndQuery(andWords),
+                Should = CreateOrQuery(orWords),
+                MustNot = CreateExcludeQuery(excludeWords)
+            };
+        }
+
+        public List<QueryContainer> CreateAndQuery(List<string> andWords)
+        {
+            return new List<QueryContainer>
+            {
+                new TermsQuery
                 {
-                    new TermsQuery
-                    {
-                        Field = "content",
-                        Terms = andWords
-                    }
-                }, 
-                Should = new List<QueryContainer>
+                    Field = "content",
+                    Terms = andWords
+                }
+            };
+        }
+
+        public List<QueryContainer> CreateOrQuery(List<string> orWords)
+        {
+            return new List<QueryContainer>
+            {
+                new TermsQuery
                 {
-                    new TermsQuery
-                    {
-                        Field = "content",
-                        Terms = orWords
-                    }
-                },
-                MustNot = new List<QueryContainer>
+                    Field = "content",
+                    Terms = orWords
+                }
+            };
+        }
+
+        public List<QueryContainer> CreateExcludeQuery(List<string> exWords)
+        {
+            return new List<QueryContainer>
+            {
+                new TermsQuery
                 {
-                    new TermsQuery
-                    {
-                        Field = "content",
-                        Terms = excludeWords
-                    }
+                    Field = "content",
+                    Terms = exWords
                 }
             };
         }
