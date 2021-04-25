@@ -13,7 +13,8 @@ namespace Test.IOTest.FileTest
             var documents = new List<string>();
             documents.Add("is what got me");
             documents.Add("h>subject to a high-voltag");
-            Assert.Equal(documents, FileReader.ReadFromFolder(path));
+            //Assert.Equal(documents, FileReader.ReadFromFolder(path));
+            Assert.Equal(new HashSet<string>(documents), new HashSet<string>(FileReader.ReadFromFolder(path)));
         }
 
         [Fact]
