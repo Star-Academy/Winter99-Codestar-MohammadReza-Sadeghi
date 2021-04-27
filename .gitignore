@@ -8,3 +8,6 @@ obj/
 bin/
 .vs/
 *.json
+!appsettings.json
+!appsettings.Development.json
+!launchSettings.json
